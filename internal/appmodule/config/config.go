@@ -1,9 +1,9 @@
 package config
 
 import (
-	"fmt"
+	"path/filepath"
 
-	"github.com/Galdoba/appcontext/configmanager"
+	"github.com/Galdoba/appcontext/xdg"
 	"github.com/Galdoba/lazyam/internal/declare"
 )
 
@@ -45,15 +45,17 @@ type Logging struct {
 	FileLevel    string `toml:"write messages above level (file)"`
 }
 
-func Default() Config {
+func Default(paths *xdg.ProgramPaths) Config {
 	return Config{
 		Declarations: Declarations{
 			InputDirectory:        `//192.168.31.4/buffer/IN/@AMEDIA_IN/`,
 			OutputDirectory:       "//192.168.31.4/buffer/IN/",
 			WorkerReportDirectory: `//192.168.31.4/buffer/IN/@AMEDIA_IN/__reports/`,
 			MetadataFiles:         []string{`//192.168.31.4/buffer/IN/@AMEDIA_IN/metadata.json`},
-			ProjectCacheFile:      declare.DefaultCacheDirWithFile(declare.PROJECTS_FILE),
-			TaskCacheFile:         declare.DefaultCacheDirWithFile(declare.TASKS_FILE),
+			// ProjectCacheFile:      declare.DefaultCacheDirWithFile(declare.PROJECTS_FILE),
+			ProjectCacheFile: filepath.Join(paths.CacheDir(), declare.PROJECTS_FILE),
+			// TaskCacheFile:    declare.DefaultCacheDirWithFile(declare.TASKS_FILE),
+			TaskCacheFile: filepath.Join(paths.CacheDir(), declare.TASKS_FILE),
 		},
 		Processing: Processing{
 			ConfigReload:          false,
@@ -69,11 +71,13 @@ func Default() Config {
 				"lock removed (cycle)":    true,
 				"lock removed (project)":  true,
 			},
-			StatisticFile: declare.DefaultCacheDirWithFile(declare.STATISTICS_FILE),
+			// StatisticFile: declare.DefaultCacheDirWithFile(declare.STATISTICS_FILE),
+			StatisticFile: filepath.Join(paths.PersistentDataDir(), declare.STATISTICS_FILE),
 		},
 		Logging: Logging{
-			Enabled:      true,
-			FilePath:     declare.DefaultCacheDirWithFile(declare.LOG_FILE),
+			Enabled: true,
+			// FilePath:     declare.DefaultCacheDirWithFile(declare.LOG_FILE),
+			FilePath:     paths.LogFile(),
 			FileRotation: "none",
 			ConsoleColor: true,
 			ConsoleLevel: "trace",
@@ -83,14 +87,14 @@ func Default() Config {
 }
 
 // Load - Load actual config file or create default on first run.
-func Load() (*Config, error) {
-	cfg := Default()
-	cm, err := configmanager.New(declare.APP_NAME, cfg)
-	if err != nil {
-		return nil, fmt.Errorf("failed to create config manager: %v", err)
-	}
-	if err := cm.Load(); err != nil {
-		return nil, fmt.Errorf("failed to load config: %v", err)
-	}
-	return &cfg, nil
-}
+// func Load() (*Config, error) {
+// 	cfg := Default()
+// 	cm, err := configmanager.New(declare.APP_NAME, cfg)
+// 	if err != nil {
+// 		return nil, fmt.Errorf("failed to create config manager: %v", err)
+// 	}
+// 	if err := cm.Load(); err != nil {
+// 		return nil, fmt.Errorf("failed to load config: %v", err)
+// 	}
+// 	return &cfg, nil
+// }

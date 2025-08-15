@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Galdoba/golog"
+	"github.com/Galdoba/appcontext/logmanager"
 	"github.com/Galdoba/lazyam/internal/analitycs"
-	"github.com/Galdoba/lazyam/internal/config"
+	"github.com/Galdoba/lazyam/internal/appmodule/config"
 	"github.com/Galdoba/lazyam/internal/declare"
 )
 
@@ -81,7 +81,7 @@ func NewProjects() *Projects {
 	return &p
 }
 
-func (original *Projects) Update(cfg *config.Config, log *golog.Logger) error {
+func (original *Projects) Update(cfg *config.Config, log *logmanager.Logger) error {
 	if original == nil {
 		original = &Projects{}
 	}
@@ -136,7 +136,7 @@ func wantUpdate(cacheFile, metadataFile string) (bool, error) {
 	return fm.ModTime().After(fc.ModTime()), nil
 }
 
-func (project *Projects) inject(new AmediaProject, log *golog.Logger) {
+func (project *Projects) inject(new AmediaProject, log *logmanager.Logger) {
 	for _, old := range project.Pool {
 		key := old.Name()
 		if old.Name() != new.Name() {
@@ -172,7 +172,7 @@ func equalProjectData(old, new AmediaProject) (bool, error) {
 	return string(dataOld) == string(dataNew), nil
 }
 
-func updateProjectData(path string, log *golog.Logger) (*Projects, error) {
+func updateProjectData(path string, log *logmanager.Logger) (*Projects, error) {
 	projects := AmediaProjectMetadata{}
 	converted := Projects{}
 	converted.Pool = make(map[string]AmediaProject)

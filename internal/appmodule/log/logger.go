@@ -5,13 +5,13 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/Galdoba/golog"
-	"github.com/Galdoba/lazyam/internal/config"
+	"github.com/Galdoba/appcontext/logmanager"
+	"github.com/Galdoba/lazyam/internal/appmodule/config"
 	"github.com/Galdoba/lazyam/internal/declare"
 )
 
 type Logger struct {
-	logger       *golog.Logger
+	logger       *logmanager.Logger
 	enabled      bool
 	logDirectory string
 	filePrefix   string
@@ -19,11 +19,11 @@ type Logger struct {
 }
 
 // Start - Create new logger based on config options.
-func Start(logging config.Logging) (*golog.Logger, error) {
+func Start(logging config.Logging) (*logmanager.Logger, error) {
 	l := Logger{}
 	l.enabled = logging.Enabled
 	if !logging.Enabled {
-		return golog.New(), nil
+		return logmanager.New(), nil
 	}
 	l = Logger{
 		enabled: logging.Enabled,
@@ -38,8 +38,8 @@ func Start(logging config.Logging) (*golog.Logger, error) {
 		return nil, fmt.Errorf("failed to enshure log directory: %v", err)
 	}
 
-	consoleLevel := golog.LevelTrace
-	fileLevel := golog.LevelTrace
+	consoleLevel := logmanager.LevelTrace
+	fileLevel := logmanager.LevelTrace
 	logName := filepath.Base(logFile)
 	lvls, strLvls := levels()
 	for i, lvl := range lvls {
@@ -51,21 +51,16 @@ func Start(logging config.Logging) (*golog.Logger, error) {
 		}
 	}
 
-	consoleHandler := golog.NewHandler(os.Stderr, consoleLevel, golog.NewTextFormatter(golog.WithColor(logging.ConsoleColor), golog.WithTimePrecision(3), golog.WithLevelTag(true)))
+	consoleHandler := logmanager.NewHandler(logmanager.Stderr, consoleLevel, logmanager.NewTextFormatter(logmanager.WithColor(logging.ConsoleColor), logmanager.WithTimePrecision(3), logmanager.WithLevelTag(true)))
 	fmt.Println("set path", filepath.Join(logDir, logName))
-	file, err := os.OpenFile(filepath.Join(logDir, logName), os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
-	if err != nil {
-		return nil, fmt.Errorf("failed to open log file: %v", err)
-	}
-	// defer file.Close()
-	fileHandler := golog.NewHandler(file, fileLevel, golog.NewTextFormatter(golog.WithTimePrecision(3), golog.WithLevelTag(true)))
-	l.logger = golog.New(golog.WithLevel(golog.LevelTrace))
+	fileHandler := logmanager.NewHandler(logFile, fileLevel, logmanager.NewTextFormatter(logmanager.WithTimePrecision(3), logmanager.WithLevelTag(true)))
+	l.logger = logmanager.New(logmanager.WithLevel(logmanager.LevelTrace))
 	l.logger.AddHandler(consoleHandler)
 	l.logger.AddHandler(fileHandler)
 
 	return l.logger, nil
 }
 
-func levels() ([]golog.LogLevel, []string) {
-	return golog.ListLevels()
+func levels() ([]logmanager.LogLevel, []string) {
+	return logmanager.ListLevels()
 }

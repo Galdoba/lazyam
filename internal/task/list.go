@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Galdoba/golog"
-	"github.com/Galdoba/lazyam/internal/config"
+	"github.com/Galdoba/appcontext/logmanager"
+	"github.com/Galdoba/lazyam/internal/appmodule/config"
 )
 
 type TaskList struct {
@@ -19,7 +19,7 @@ func NewTaskList() *TaskList {
 	return &tl
 }
 
-func (tl *TaskList) Update(cfg *config.Config, log *golog.Logger) error {
+func (tl *TaskList) Update(cfg *config.Config, log *logmanager.Logger) error {
 	path := cfg.Declarations.TaskCacheFile
 	data, err := os.ReadFile(path)
 	if err != nil {

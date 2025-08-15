@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 
 	"github.com/Galdoba/golog"
-	"github.com/Galdoba/lazyam/internal/config"
+	"github.com/Galdoba/lazyam/internal/appmodule/config"
 	"github.com/Galdoba/lazyam/internal/projectdata"
 	"github.com/Galdoba/lazyam/internal/task"
 )

@@ -8,41 +8,34 @@ import (
 	"github.com/urfave/cli/v3"
 
 	"github.com/Galdoba/lazyam/internal/action"
-	"github.com/Galdoba/lazyam/internal/config"
+	"github.com/Galdoba/lazyam/internal/appmodule"
 	"github.com/Galdoba/lazyam/internal/declare"
-	"github.com/Galdoba/lazyam/internal/log"
+	"github.com/Galdoba/lazyam/internal/flags"
 )
 
 func main() {
-	cfg, err := config.Load()
+	appName := declare.APP_NAME
+	actx, err := appmodule.Initiate(appName)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "failed to load config: %v", err)
-		os.Exit(1)
-	}
-	logger, err := log.Start(cfg.Logging)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "failed to start logger: %v", err)
-		os.Exit(1)
+		fmt.Fprintf(os.Stderr, "module initiation failed: %v", err)
 	}
 	cmd := cli.Command{
 		Name:        declare.APP_NAME,
-		Version:     "0.0.0",
+		Version:     "0.2.0",
 		Description: "Automatic amedia content transcoding.",
-		Action:      action.Run,
+		Action:      action.Process(actx),
 
-		Metadata: map[string]interface{}{
-			"config": cfg,
-			"logger": logger,
-		},
 		SliceFlagSeparator: ";",
+		Flags: []cli.Flag{
+			flags.KeepCache,
+		},
 	}
-	logger.Infof("start")
 
 	if err := cmd.Run(context.Background(), os.Args); err != nil {
-		logger.Errorf("program shutdown: %v", err.Error())
+		actx.Log.Errorf("program shutdown: %v", err.Error())
 		os.Exit(1)
 	}
-	logger.Infof("graceful shutdown")
+	actx.Log.Debugf("graceful shutdown")
 	os.Exit(0)
 
 }

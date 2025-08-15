@@ -5,8 +5,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/Galdoba/golog"
-	"github.com/Galdoba/lazyam/internal/config"
+	"github.com/Galdoba/appcontext/logmanager"
+	"github.com/Galdoba/lazyam/internal/appmodule/config"
 )
 
 type ProcessStats struct {
@@ -22,7 +22,7 @@ var NoStats = ProcessStats{
 
 var analitycTracker = &ProcessStats{}
 
-func StartTracker(cfg *config.Config, logger *golog.Logger) {
+func StartTracker(cfg *config.Config, logger *logmanager.Logger) {
 	if !cfg.Analitycs.Enabled {
 		logger.Noticef("analitycs disabled")
 		analitycTracker = &NoStats
@@ -47,7 +47,7 @@ func StartTracker(cfg *config.Config, logger *golog.Logger) {
 	analitycTracker = &stats
 }
 
-func UpdateCompleted(log *golog.Logger) {
+func UpdateCompleted(log *logmanager.Logger) {
 	if !analitycTracker.enabled {
 		return
 	}

@@ -1,5 +1,5 @@
-github.com/Galdoba/appcontext v0.0.0-20250813133503-bf4e1342268a h1:pMNYacI01JJx430fy69jEWLIK/6u4gGkZBH9szpcyvs=
-github.com/Galdoba/appcontext v0.0.0-20250813133503-bf4e1342268a/go.mod h1:BWkkLag3DwZiBOsUtbAe+rYbVFvkrvVIAH8kgIXTl50=
+github.com/Galdoba/appcontext v0.0.0-20250815032954-6ec460aabe50 h1:g16HNAyxtDIUVhMm77LDzqGUHoD1X9tKg9hV7ioVznE=
+github.com/Galdoba/appcontext v0.0.0-20250815032954-6ec460aabe50/go.mod h1:J43ab4FhNGUsd0Y8ysCBsKIb4QoUtqNWlIHJaHrAo+8=
 github.com/Galdoba/devtools v0.0.0-20250610030608-28c769821c91 h1:IbbuIuybfEOkQsn5wgOvDJqhuNsCYyCg7NQoYyeznSA=
 github.com/Galdoba/devtools v0.0.0-20250610030608-28c769821c91/go.mod h1:cg9iGjz32mN/yfZjI86ZmlX/JSwhqmIKBYExieUaVNQ=
 github.com/Galdoba/golog v0.0.0-20250812084711-866f70ebdf9f h1:TMfKvkZed67HZ3GAEZxzEKnnxydhfESkslef8I0VWM0=

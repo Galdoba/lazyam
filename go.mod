@@ -3,7 +3,7 @@ module github.com/Galdoba/lazyam
 go 1.23.1
 
 require (
-	github.com/Galdoba/appcontext v0.0.0-20250813133503-bf4e1342268a
+	github.com/Galdoba/appcontext v0.0.0-20250815032954-6ec460aabe50
 	github.com/Galdoba/devtools v0.0.0-20250610030608-28c769821c91
 	github.com/Galdoba/golog v0.0.0-20250812084711-866f70ebdf9f
 	github.com/urfave/cli/v3 v3.4.1
