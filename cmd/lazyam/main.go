@@ -18,6 +18,7 @@ func main() {
 	actx, err := appmodule.Initiate(appName)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "module initiation failed: %v", err)
+		os.Exit(1)
 	}
 	cmd := cli.Command{
 		Name:        declare.APP_NAME,
@@ -37,5 +38,4 @@ func main() {
 	}
 	actx.Log.Debugf("graceful shutdown")
 	os.Exit(0)
-
 }

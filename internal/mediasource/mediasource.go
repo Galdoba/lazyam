@@ -45,7 +45,6 @@ func NewSourceMedia(mp *ump.MediaProfile) SourceFile {
 		}
 	}
 	if count == 0 {
-		// fmt.Println("ignore", sf.Name)
 		sf.Ignore = true
 	}
 	return sf

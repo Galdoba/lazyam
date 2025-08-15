@@ -1,11 +1,5 @@
 package declare
 
-import (
-	"fmt"
-	"os"
-	"path/filepath"
-)
-
 const (
 	APP_NAME        = "lazyam"
 	LOG_FILE        = "lazyam.log"
@@ -14,14 +8,14 @@ const (
 	TASKS_FILE      = "tasks_data.json"
 )
 
-func DefaultCacheDirWithFile(file string) string {
-	return filepath.ToSlash(filepath.Join(home(), ".cache", APP_NAME, file))
-}
+// // func DefaultCacheDirWithFile(file string) string {
+// // 	return filepath.ToSlash(filepath.Join(home(), ".cache", APP_NAME, file))
+// // }
 
-func home() string {
-	h, err := os.UserHomeDir()
-	if err != nil {
-		panic(fmt.Sprintf("%v", err))
-	}
-	return h
-}
+// func home() string {
+// 	h, err := os.UserHomeDir()
+// 	if err != nil {
+// 		panic(fmt.Sprintf("%v", err))
+// 	}
+// 	return h
+// }

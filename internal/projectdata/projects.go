@@ -8,7 +8,6 @@ import (
 	"github.com/Galdoba/appcontext/logmanager"
 	"github.com/Galdoba/lazyam/internal/analitycs"
 	"github.com/Galdoba/lazyam/internal/appmodule/config"
-	"github.com/Galdoba/lazyam/internal/declare"
 )
 
 // Projects - Represents list of project metadata.
@@ -86,8 +85,8 @@ func (original *Projects) Update(cfg *config.Config, log *logmanager.Logger) err
 		original = &Projects{}
 	}
 	paths := cfg.Declarations.MetadataFiles
-	for _, path := range paths {
-		want, err := wantUpdate(cfg.Declarations.ProjectCacheFile, path)
+	for _, sourceFile := range paths {
+		want, err := wantUpdate(cfg.Declarations.ProjectCacheFile, sourceFile)
 		if err != nil {
 			log.Warnf("failed to asses file modification time: %v", err)
 			log.Noticef("update rejected")
@@ -95,7 +94,7 @@ func (original *Projects) Update(cfg *config.Config, log *logmanager.Logger) err
 		if !want && len(original.Pool) > 0 {
 			continue
 		}
-		updated, err := updateProjectData(path, log)
+		updated, err := updateProjectData(sourceFile, cfg.Declarations.ProjectCacheFile, log)
 		if err != nil {
 			log.Warnf("failed to update project data: %v", err)
 			continue
@@ -106,7 +105,7 @@ func (original *Projects) Update(cfg *config.Config, log *logmanager.Logger) err
 		for _, new := range updated.Pool {
 			original.inject(new, log)
 		}
-		log.Debugf("cache update from %v completed", path)
+		log.Debugf("cache %v update from %v completed", cfg.Declarations.ProjectCacheFile, sourceFile)
 		if err := original.Save(cfg.Declarations.ProjectCacheFile); err != nil {
 			log.Errorf("cache saving failed: %v", nil)
 		}
@@ -172,11 +171,11 @@ func equalProjectData(old, new AmediaProject) (bool, error) {
 	return string(dataOld) == string(dataNew), nil
 }
 
-func updateProjectData(path string, log *logmanager.Logger) (*Projects, error) {
+func updateProjectData(source, destination string, log *logmanager.Logger) (*Projects, error) {
 	projects := AmediaProjectMetadata{}
 	converted := Projects{}
 	converted.Pool = make(map[string]AmediaProject)
-	bt, err := os.ReadFile(path)
+	bt, err := os.ReadFile(source)
 	if err != nil {
 		log.Errorf("failed to read file: %v", err)
 		return nil, fmt.Errorf("failed to read file: %v", err)
@@ -216,24 +215,12 @@ func updateProjectData(path string, log *logmanager.Logger) (*Projects, error) {
 		log.Errorf("failed to marshal converted data: %v positions", len(converted.Pool))
 		return nil, fmt.Errorf("failed to marshal converted data: %v positions", len(converted.Pool))
 	}
-	if err := os.WriteFile(declare.DefaultCacheDirWithFile(declare.PROJECTS_FILE), data, 0644); err != nil {
+	if err := os.WriteFile(destination, data, 0644); err != nil {
 		log.Errorf("failed to write converted data to local cache: %v", err)
 		return nil, fmt.Errorf("failed to write converted data to local cache: %v", err)
 	}
-	log.Tracef("update completed")
+	log.Debugf("update completed")
 	analitycs.UpdateCompleted(log)
-	// for _, pr := range converted.List {
-	// 	if len(pr.Seasons) == 0 && pr.File.Duration != nil {
-	// 		break
-	// 	}
-	// 	for s, season := range pr.Seasons {
-	// 		for e, episode := range season.Episodes {
-	// 			if episode.File.Serid == nil {
-	// 				log.Warnf("no data for file %v s%ve%v", pr.RusTitle, s+1, e+1)
-	// 			}
-	// 		}
-	// 	}
-	// }
 
 	return &converted, nil
 }
@@ -282,7 +269,3 @@ func (prj AmediaProject) SeasonEpisode(guid string) (int, int) {
 	}
 	return -1, -1
 }
-
-// func Merge(dest, src AmediaProject) AmediaProject {
-
-// }
