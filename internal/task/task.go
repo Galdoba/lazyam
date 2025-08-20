@@ -27,9 +27,11 @@ type Task struct {
 	Season            int                               `json:"season num"`
 	Episode           int                               `json:"episode num"`
 	AmediaFileKey     string                            `json:"filekey"`
+	IsSport           bool                              `json:"is sport"`
 	InderlaceScanned  bool                              `json:"interlace scanned"`
 	InterlaceDetected bool                              `json:"interlace detected"`
-	OUTBASE           string                            `json:"projected output name"`
+	INBASE            string                            `json:"projected source name prefix"`
+	OUTBASE           string                            `json:"projected output name prefix"`
 }
 
 func New(directory string) *Task {
@@ -105,7 +107,21 @@ func constructOutbase(t *Task) string {
 	tags := []string{
 		toTitle(translit.String(title, translit.RegisterLow())),
 	}
-	tags = appendNonEmpty(tags, seasEpisString(t.Season, t.Episode))
+	tags = appendNonEmpty(tags, seasEpisOutString(t.Season, t.Episode))
+	tags = appendNonEmpty(tags, t.PRT)
+	return strings.Join(tags, "_")
+}
+
+func constructInbase(t *Task) string {
+	title := t.AmediaTitleRus
+	if title == "" {
+		title = t.AmediaTitleOri
+	}
+
+	tags := []string{
+		toTitle(translit.String(title, translit.RegisterLow())),
+	}
+	tags = appendNonEmpty(tags, seasEpisInString(t.Season, t.Episode))
 	tags = appendNonEmpty(tags, t.PRT)
 	return strings.Join(tags, "_")
 }
@@ -129,7 +145,18 @@ func toTitle(s string) string {
 	return out
 }
 
-func seasEpisString(s, e int) string {
+func seasEpisInString(s, e int) string {
+	out := ""
+	if s > 0 {
+		out += "s" + numToStr(s)
+	}
+	if e > 0 {
+		out += "e" + numToStr(e)
+	}
+	return out
+
+}
+func seasEpisOutString(s, e int) string {
 	out := ""
 	if s > 0 {
 		out += "s" + numToStr(s)

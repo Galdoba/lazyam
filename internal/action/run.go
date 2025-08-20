@@ -31,6 +31,7 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 	return func(ctx context.Context, c *cli.Command) error {
 		cfg := actx.Config
 		log := actx.Log
+		log.Noticef("session started")
 		analitycs.StartTracker(cfg, log)
 		if !c.Bool(flags.KEEP_CACHE) {
 			os.Remove(cfg.Declarations.TaskCacheFile)
@@ -46,9 +47,7 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 		for !breakinError {
 			switch cycleStage {
 			case cycleStage_ReadCache:
-				log.Tracef("start cycle %v", cycle)
 				cachePath := cfg.Declarations.ProjectCacheFile
-				log.Tracef("load metadata cache: %v", cachePath)
 				loadedMeta, err := actionstage.LoadMetadataCache(cachePath)
 				switch err := err.(type) {
 				case *lazyerror.LazyError:
@@ -59,7 +58,7 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 							log.Errorf("failed to create new cache file: %v", err)
 							return fmt.Errorf("failed to create new cache file: %v", err)
 						}
-						log.Infof("new cache file created: %v", cachePath)
+						log.Debugf("new cache file created: %v", cachePath)
 						continue
 					case false:
 						log.Errorf(format, errArgs...)
@@ -69,19 +68,17 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 				}
 				cachePath = cfg.Declarations.TaskCacheFile
 				projects = loadedMeta
-				log.Tracef("load task cache: %v", cachePath)
 				loadedTasks, err := actionstage.LoadProjectsCache(cachePath)
 				switch err := err.(type) {
 				case *lazyerror.LazyError:
 					format, errArgs := err.FormatArgs()
 					switch err.IsExpected() {
 					case true:
-						log.Warnf(format, errArgs...)
 						if err := tasklist.Save(cachePath); err != nil {
 							log.Errorf("failed to create new cache file: %v", err)
 							return fmt.Errorf("failed to create new cache file: %v", err)
 						}
-						log.Infof("new cache file created: %v", cachePath)
+						log.Debugf("new cache file created: %v", cachePath)
 						continue
 					case false:
 						log.Errorf(format, errArgs...)
@@ -90,7 +87,7 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 
 				}
 				tasklist = loadedTasks
-
+				log.Debugf("cache loaded")
 				cycleStage++
 			case cycleStage_UpdateCache:
 				dataFrom := make(map[string]Updater)
@@ -117,7 +114,6 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 
 				cycleStage++
 			case cycleStage_ProjectProcessing:
-				log.Infof("emulate process")
 				taskDirectories, err := actionstage.ListActiveTasks(cfg)
 				if err != nil {
 					log.Errorf("failed to list active tasks: %v", err.Error())
@@ -140,6 +136,7 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 					log.Errorf("failed to save tasklist: %v", err.Error())
 				}
 				for key, activeTask := range tasklist.Tasks {
+
 					done := false
 					stageResult := 1
 					for !done {
@@ -160,7 +157,6 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 							err := activeTask.FillMetatada(projects)
 							switch err {
 							case nil:
-								log.Infof("metadata filled: %v", activeTask.OUTBASE)
 								stageResult = 1
 								activeTask.ProcessingStage = task.Phase_ScanSources
 								continue
@@ -185,15 +181,15 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 						case task.Phase_StartInterlaceCheck:
 							source := activeTask.VideoSourceName()
 							if source == "" {
-								log.Tracef("no source files for: %v", activeTask.OUTBASE)
 								break
 							}
-							if !strings.Contains(source, "SPO") {
+							if !strings.Contains(source, "SPO_") {
 								activeTask.ProcessingStage = task.Phase_EvaluateTrancecodingProcess
 								activeTask.InderlaceScanned = true
 								stageResult = 1
+								break
 							}
-							log.Tracef("source for: %v", activeTask.OUTBASE)
+							activeTask.IsSport = true
 							check := scriptkit.New(filepath.ToSlash(filepath.Join(cfg.Declarations.OutputDirectory, fmt.Sprintf("/_interlace_scan_%v.sh", activeTask.OUTBASE))),
 								scriptkit.WithTemplate(scriptkit.ScanInterlace),
 								scriptkit.WithArgs(
@@ -210,16 +206,84 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 							activeTask.ProcessingStage = task.Phase_EvaluateInterlaceCheckResult
 						case task.Phase_EvaluateInterlaceCheckResult:
 							if err := activeTask.AssesInterlaceReport(); err != nil {
-								log.Tracef("interlace check evaluation: %v", err.Error())
+								log.Debugf("interlace check evaluation: %v", err.Error())
 								break
 							}
-							if activeTask.InderlaceScanned && activeTask.InterlaceDetected {
-								log.Noticef("%v interlace=%v", activeTask.OUTBASE, activeTask.InterlaceDetected)
+							if activeTask.InderlaceScanned {
+								log.Debugf("interlace scan completed: %v", activeTask.OUTBASE)
+								log.Debugf("%v interlace=%v", activeTask.OUTBASE, activeTask.InterlaceDetected)
+								if activeTask.InterlaceDetected {
+									log.Noticef("%v interlace=%v", activeTask.OUTBASE, activeTask.InterlaceDetected)
+									stageResult = 1
+									activeTask.ProcessingStage = task.Phase_EvaluateTrancecodingProcess
+								}
 								stageResult = 1
 								activeTask.ProcessingStage = task.Phase_EvaluateTrancecodingProcess
 							}
 						case task.Phase_EvaluateTrancecodingProcess:
-							break
+							log.Debugf("start trancoding phase: %v", activeTask.OUTBASE)
+							source := ""
+							srt := ""
+							for _, v := range activeTask.MediaFiles {
+								if strings.HasSuffix(v.Name, ".srt") {
+									srt = v.Name
+									log.Debugf("subs added: %v", srt)
+								} else {
+									source = v.Name
+									log.Debugf("source added: %v", source)
+								}
+							}
+							if err := moveSources(cfg, activeTask, source, srt); err != nil {
+								log.Errorf("failed to move sources: %v", err.Error())
+								break
+							}
+							source = activeTask.INBASE + "_" + source
+							srt = activeTask.INBASE + "_" + srt
+							template, audioSuffixes := selectTemplate(activeTask)
+							transcodingProcess := &scriptkit.Script{}
+							scriptPath := filepath.ToSlash(filepath.Join(cfg.Declarations.OutputDirectory, fmt.Sprintf("%v.sh", activeTask.INBASE)))
+
+							switch template {
+							case scriptkit.Amedia1:
+								transcodingProcess = scriptkit.New(scriptPath, scriptkit.WithTemplate(template),
+									scriptkit.WithArgs(
+										scriptkit.ScriptArg("source", source),
+										scriptkit.ScriptArg("base_with_season", activeTask.TranslitedBaseSeason()),
+										scriptkit.ScriptArg("outbase", activeTask.OUTBASE),
+										scriptkit.ScriptArg("suffix", audioSuffixes[0]),
+									),
+								)
+							case scriptkit.Amedia2:
+								transcodingProcess = scriptkit.New(scriptPath, scriptkit.WithTemplate(template),
+									scriptkit.WithArgs(
+										scriptkit.ScriptArg("source", source),
+										scriptkit.ScriptArg("base_with_season", activeTask.TranslitedBaseSeason()),
+										scriptkit.ScriptArg("outbase", activeTask.OUTBASE),
+										scriptkit.ScriptArg("suffix_1", audioSuffixes[0]),
+										scriptkit.ScriptArg("suffix_2", audioSuffixes[1]),
+									),
+								)
+							case scriptkit.Amedia2S:
+								transcodingProcess = scriptkit.New(scriptPath, scriptkit.WithTemplate(template),
+									scriptkit.WithArgs(
+										scriptkit.ScriptArg("source", source),
+										scriptkit.ScriptArg("srt", srt),
+										scriptkit.ScriptArg("base_with_season", activeTask.TranslitedBaseSeason()),
+										scriptkit.ScriptArg("outbase", activeTask.OUTBASE),
+										scriptkit.ScriptArg("suffix_1", audioSuffixes[0]),
+										scriptkit.ScriptArg("suffix_2", audioSuffixes[1]),
+									),
+								)
+
+							}
+
+							if err := transcodingProcess.CreateScriptFile(); err != nil {
+								log.Errorf("failed to start interlace check: %v", err.Error())
+								break
+							}
+							log.Infof("start transcode check: %v", transcodingProcess.Path())
+							activeTask.ProcessingStage = task.Phase_WaitTranceCodingResult
+							stageResult = 1
 						}
 
 					}
@@ -229,43 +293,15 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 			case cycleStage_Sleep:
 				actionstage.Sleep(cfg.Processing.DormantMode)
 				cycleStage = cycleStage_ReadCache
-				log.Tracef("end cycle %v", cycle)
 				cycle++
 			}
 
-			if cycle > 3 {
-				breakinError = true
-			}
-
 		}
-		log.Infof("action %v ended", "run")
 
 		return nil
 
 	}
 }
-
-/*
-Cycle:
-1 Read metadata files
-2 Update MetaData Cache
-3 Handle Cycle Lock
-4 Read Projects
-5   Process projects
-6 Read Feedback
-7 Update Stats
-8 Handle autounlock
-9 Handle sleep mode
-
-project status
-1 found
-2 locked
-3 ready
-4 interlace check
-5 processing
-6 done
-
-*/
 
 type Updater interface {
 	Update(*config.Config, *logmanager.Logger) error
@@ -274,4 +310,46 @@ type Updater interface {
 
 func toLinuxPath(path string) string {
 	return strings.ReplaceAll(path, "//192.168.31.4/buffer/IN", "/home/pemaltynov/IN")
+}
+
+func selectTemplate(t *task.Task) (string, []string) {
+	suffixes := t.Suffixes()
+	keep := []string{}
+	for _, suff := range suffixes {
+		if !strings.Contains(suff, "RUS") && t.IsSport {
+			continue
+		}
+		keep = append(keep, suff)
+	}
+	srt := false
+	for _, file := range t.MediaFiles {
+		if strings.Contains(file.Name, ".srt") {
+			srt = true
+		}
+	}
+	switch len(keep) {
+	case 1:
+		return scriptkit.Amedia1, keep
+	case 2:
+		if srt {
+			return scriptkit.Amedia2S, keep
+		}
+		return scriptkit.Amedia2, keep
+	}
+	return "", []string{}
+
+}
+
+func moveSources(cfg *config.Config, t *task.Task, sources ...string) error {
+	for _, src := range sources {
+		if src == "" {
+			continue
+		}
+		from := filepath.Join(t.Directory, src)
+		to := filepath.Join(cfg.Declarations.OutputDirectory, t.INBASE+"_"+src)
+		if err := os.Rename(from, to); err != nil {
+			return err
+		}
+	}
+	return nil
 }

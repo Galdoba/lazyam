@@ -10,6 +10,7 @@ import (
 
 	"github.com/Galdoba/lazyam/internal/mediasource"
 	"github.com/Galdoba/lazyam/internal/projectdata"
+	"github.com/Galdoba/lazyam/pkg/translit"
 	"github.com/Galdoba/lazyam/pkg/ump"
 )
 
@@ -20,41 +21,17 @@ const (
 	Phase_EvaluateInterlaceCheckResult
 	Phase_StartTrancecoding
 	Phase_EvaluateTrancecodingProcess
+	Phase_WaitTranceCodingResult
 	Phase_CleanData
 )
 
 func (t *Task) FillMetatada(prj *projectdata.Projects) error {
-	// files, err := os.ReadDir(t.Directory)
-	// if err != nil {
-	// 	return fmt.Errorf("failed to read project directory: %v", err)
-	// }
-	// t.Files = []string{}
 	t.PRT = strings.TrimPrefix(getPRT(t.Directory), "_")
-	// for _, file := range files {
-	// 	if file.IsDir() {
-	// 		continue
-	// 	}
-	// 	switch file.Name() {
-	// 	default:
-	// 		srcFile := joinPath(t.Directory, file.Name())
-	// 		mp := ump.NewProfile()
-	// 		switch err := mp.ConsumeFile(srcFile); err {
-	// 		case nil:
-	// 		default:
-	// 			ok := false
-	// 			if strings.HasPrefix(err.Error(), "file empty") {
-	// 				ok = true
-	// 			}
-	// 			if !ok {
-	// 				return fmt.Errorf("failed to scan source: %v", err)
-	// 			}
-	// 		}
-	// 		t.MediaFiles[srcFile] = mediasource.NewSourceMedia(mp)
-
-	// 	}
-	// }
 	source := taskMeta{}
 	t.PRT = getPRT(t.Directory)
+	t.AmediaFileKey = ""
+	project := projectdata.AmediaProject{}
+
 	if meta, ok := t.SignalFiles["metadata"]; ok {
 		data, err := os.ReadFile(meta)
 		if err != nil {
@@ -63,11 +40,8 @@ func (t *Task) FillMetatada(prj *projectdata.Projects) error {
 		if err := json.Unmarshal(data, &source); err != nil {
 			return fmt.Errorf("failed to unmarshal: %v", err)
 		}
-		project := prj.SearchByGUID(source.GUID)
+		project = prj.SearchByGUID(source.GUID)
 		t.AmediaGUID = source.GUID
-		t.AmediaTitleRus = project.RusTitle
-		t.AmediaTitleOri = project.OriginalTitle
-		t.Type = "MOV"
 		if source.GUID != project.GUID {
 			t.Type = "SER"
 			t.Season, t.Episode = project.SeasonEpisode(t.AmediaGUID)
@@ -75,11 +49,17 @@ func (t *Task) FillMetatada(prj *projectdata.Projects) error {
 		if source.File.Serid != "" {
 			t.AmediaFileKey = source.File.Serid
 		}
+	} else {
+		project, t.AmediaFileKey = prj.SearchByAmediaFileKey(t.Directory)
+	}
+	if project.Name() != "" {
+		t.AmediaTitleRus = project.RusTitle
+		t.AmediaTitleOri = project.OriginalTitle
 		t.OUTBASE = constructOutbase(t)
-
+		t.INBASE = constructInbase(t)
 	} else {
 		t.OUTBASE = filepath.Base(t.Directory)
-		return fmt.Errorf("no metadata present")
+		t.INBASE = filepath.Base(t.Directory)
 	}
 
 	return nil
@@ -174,4 +154,38 @@ func parseIdet(path string) (idetScan, error) {
 	}
 	is.interlaceScore = (is.frameCount[9] * 1000) / total
 	return is, nil
+}
+
+func (t *Task) TranslitedBase() string {
+	base := ""
+	if t.AmediaTitleRus != "" {
+		base = translit.String(t.AmediaTitleRus, translit.RegisterLow())
+	} else {
+		base = translit.String(t.AmediaTitleOri, translit.RegisterLow())
+	}
+	return toTitle(base)
+}
+
+func (t *Task) TranslitedBaseSeason() string {
+	out := ""
+	if t.Season < 1 {
+		return ""
+	}
+	if t.Season > 0 {
+		out += "_s" + numToStr(t.Season)
+	}
+	return t.TranslitedBase() + out
+}
+
+func (t *Task) Suffixes() []string {
+	suf := []string{}
+	for _, v := range t.MediaFiles {
+		if len(v.Languages) == 0 {
+			continue
+		}
+		for _, lang := range v.Languages {
+			suf = append(suf, "AUDIO"+strings.ToUpper(lang)+v.Layout[0])
+		}
+	}
+	return suf
 }

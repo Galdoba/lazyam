@@ -4,6 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"path/filepath"
+	"strings"
+	"time"
 
 	"github.com/Galdoba/appcontext/logmanager"
 	"github.com/Galdoba/lazyam/internal/analitycs"
@@ -12,7 +15,8 @@ import (
 
 // Projects - Represents list of project metadata.
 type Projects struct {
-	Pool map[string]AmediaProject `json:"project list"`
+	Pool       map[string]AmediaProject `json:"project list"`
+	LastUpdate time.Time                `json:"last updated"`
 }
 
 // AmediaProject - Represents lazyam unified project metadata format.
@@ -59,7 +63,7 @@ type AmediaProject struct {
 	Directors           string   `json:"directors,omitempty"`
 	EndDate             string   `json:"end_date,omitempty"`
 	Seasons             []Season `json:"seasons,omitempty"`
-	File                File     `json:"files,omitempty"`
+	File                File     `json:"file,omitempty"`
 	Genre               string   `json:"genre,omitempty"`
 	GUID                string   `json:"guid,omitempty"`
 	ImdbID              string   `json:"imdb_id,omitempty"`
@@ -86,14 +90,24 @@ func (original *Projects) Update(cfg *config.Config, log *logmanager.Logger) err
 	}
 	paths := cfg.Declarations.MetadataFiles
 	for _, sourceFile := range paths {
-		want, err := wantUpdate(cfg.Declarations.ProjectCacheFile, sourceFile)
+		metadataUpdateTime, err := fileModTime(sourceFile)
 		if err != nil {
 			log.Warnf("failed to asses file modification time: %v", err)
 			log.Noticef("update rejected")
 		}
-		if !want && len(original.Pool) > 0 {
+		switch wantUpdate(original, metadataUpdateTime) {
+		case false:
+			log.Tracef("skip update")
 			continue
+		case true:
+			log.Tracef("want update")
 		}
+		// want, err := wantUpdate(cfg.Declarations.ProjectCacheFile, sourceFile)
+		// if err != nil {
+		// }
+		// if !want && len(original.Pool) > 0 {
+		// 	continue
+		// }
 		updated, err := updateProjectData(sourceFile, cfg.Declarations.ProjectCacheFile, log)
 		if err != nil {
 			log.Warnf("failed to update project data: %v", err)
@@ -105,10 +119,11 @@ func (original *Projects) Update(cfg *config.Config, log *logmanager.Logger) err
 		for _, new := range updated.Pool {
 			original.inject(new, log)
 		}
-		log.Debugf("cache %v update from %v completed", cfg.Declarations.ProjectCacheFile, sourceFile)
+		log.Infof("updated: %v from %v", cfg.Declarations.ProjectCacheFile, sourceFile)
 		if err := original.Save(cfg.Declarations.ProjectCacheFile); err != nil {
 			log.Errorf("cache saving failed: %v", nil)
 		}
+		original.LastUpdate = metadataUpdateTime
 	}
 	return nil
 }
@@ -123,16 +138,31 @@ func (ap AmediaProject) Name() string {
 	return ap.GUID
 }
 
-func wantUpdate(cacheFile, metadataFile string) (bool, error) {
-	fc, err := os.Stat(cacheFile)
-	if err != nil {
-		return false, err
-	}
+func wantUpdate0(cacheUpdateTimestamp, metadataFile string) (bool, error) {
+	// fc, err := os.Stat(cacheFile)
+	// if err != nil {
+	// 	return false, err
+	// }
 	fm, err := os.Stat(metadataFile)
 	if err != nil {
 		return false, err
 	}
-	return fm.ModTime().After(fc.ModTime()), nil
+
+	return fm.ModTime().Format(time.DateTime) == cacheUpdateTimestamp, nil
+}
+func wantUpdate(projects *Projects, metadataUpdateTime time.Time) bool {
+	if len(projects.Pool) == 0 {
+		return true
+	}
+	return metadataUpdateTime.After(projects.LastUpdate)
+}
+
+func fileModTime(path string) (time.Time, error) {
+	f, err := os.Stat(path)
+	if err != nil {
+		return time.Time{}, err
+	}
+	return f.ModTime(), nil
 }
 
 func (project *Projects) inject(new AmediaProject, log *logmanager.Logger) {
@@ -144,7 +174,7 @@ func (project *Projects) inject(new AmediaProject, log *logmanager.Logger) {
 		equal, err := equalProjectData(old, new)
 		if err != nil {
 			log.Errorf("project comparison failed: %v", err)
-			log.Infof("skip update: %v")
+			log.Infof("skip update: %v", old.Name())
 			continue
 		}
 		switch equal {
@@ -156,7 +186,6 @@ func (project *Projects) inject(new AmediaProject, log *logmanager.Logger) {
 		return
 	}
 	project.Pool[new.Name()] = new
-	log.Tracef("project %v added", new.OriginalTitle)
 }
 
 func equalProjectData(old, new AmediaProject) (bool, error) {
@@ -172,6 +201,7 @@ func equalProjectData(old, new AmediaProject) (bool, error) {
 }
 
 func updateProjectData(source, destination string, log *logmanager.Logger) (*Projects, error) {
+	log.Infof("update started: %v", destination)
 	projects := AmediaProjectMetadata{}
 	converted := Projects{}
 	converted.Pool = make(map[string]AmediaProject)
@@ -195,7 +225,6 @@ func updateProjectData(source, destination string, log *logmanager.Logger) (*Pro
 			log.Warnf("failed to unmarshal data: cmsID:%v (%v)", film.CmsID, film.RusTitle)
 		}
 		converted.Pool[pr.Name()] = pr
-		log.Tracef("project data added: %v (%v) (%v)", pr.CmsID, pr.RusTitle, pr.OriginalTitle)
 	}
 	for _, ser := range projects.Series {
 		pr := AmediaProject{}
@@ -208,7 +237,6 @@ func updateProjectData(source, destination string, log *logmanager.Logger) (*Pro
 			log.Errorf("failed to unmarshal data: %v", err.Error())
 		}
 		converted.Pool[pr.Name()] = pr
-		log.Tracef("project data added: %v (%v) (%v)", pr.CmsID, pr.RusTitle, pr.OriginalTitle)
 	}
 	data, err := json.MarshalIndent(&converted, "", "  ")
 	if err != nil {
@@ -219,7 +247,7 @@ func updateProjectData(source, destination string, log *logmanager.Logger) (*Pro
 		log.Errorf("failed to write converted data to local cache: %v", err)
 		return nil, fmt.Errorf("failed to write converted data to local cache: %v", err)
 	}
-	log.Debugf("update completed")
+	// log.Debugf("update completed")
 	analitycs.UpdateCompleted(log)
 
 	return &converted, nil
@@ -257,15 +285,41 @@ func (prj AmediaProject) SeasonEpisode(guid string) (int, int) {
 	if prj.GUID == guid {
 		return 0, 0
 	}
-	for s, season := range prj.Seasons {
+	for _, season := range prj.Seasons {
 		if season.GUID == guid {
-			return s + 1, 0
+			return int(season.OrderNumber), 0
 		}
-		for e, episode := range season.Episodes {
+		for _, episode := range season.Episodes {
 			if episode.GUID == guid {
-				return s + 1, e + 1
+				return int(season.OrderNumber), int(episode.OrderNumber)
 			}
 		}
 	}
 	return -1, -1
+}
+
+func (prj *Projects) SearchByAmediaFileKey(dir string) (AmediaProject, string) {
+	notFound := AmediaProject{}
+	fi, err := os.ReadDir(dir)
+	if err != nil {
+		return notFound, ""
+	}
+	for _, f := range fi {
+		seridCandidate := strings.TrimSuffix(filepath.Base(f.Name()), filepath.Ext(f.Name()))
+		for _, pr := range prj.Pool {
+
+			if pr.File.Serid == seridCandidate {
+				return pr, seridCandidate
+			}
+			for _, season := range pr.Seasons {
+				for _, episode := range season.Episodes {
+					if episode.File.Serid == seridCandidate {
+						return pr, seridCandidate
+					}
+				}
+			}
+
+		}
+	}
+	return notFound, ""
 }

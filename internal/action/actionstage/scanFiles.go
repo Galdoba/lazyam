@@ -27,7 +27,7 @@ func ScanSources(cfg *config.Config, log *golog.Logger, prj *projectdata.Project
 		}
 		switch err := tsk.FillMetatada(prj); err {
 		case nil:
-			log.Debugf("metadata filled for %v", tsk.OUTBASE)
+			log.Tracef("metadata filled for %v", tsk.OUTBASE)
 		default:
 			log.Warnf("failed to fill %v project metadata: %v", tsk.OUTBASE, err.Error())
 		}

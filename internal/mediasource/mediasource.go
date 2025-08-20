@@ -1,7 +1,6 @@
 package mediasource
 
 import (
-	"fmt"
 	"path/filepath"
 	"strings"
 
@@ -31,7 +30,6 @@ func NewSourceMedia(mp *ump.MediaProfile) SourceFile {
 		case ump.CODEC_TYPE_VIDEO:
 			sf.Interlace = -1
 			sf.Type = "SOURCE"
-			fmt.Println("set source", sf.Name)
 		case ump.CODEC_TYPE_AUDIO:
 			switch stream.Channels {
 			case 2:
