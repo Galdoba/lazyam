@@ -5,13 +5,13 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/Galdoba/golog"
+	"github.com/Galdoba/appcontext/logmanager"
 	"github.com/Galdoba/lazyam/internal/appmodule/config"
 	"github.com/Galdoba/lazyam/internal/projectdata"
 	"github.com/Galdoba/lazyam/internal/task"
 )
 
-func ScanSources(cfg *config.Config, log *golog.Logger, prj *projectdata.Projects) ([]*task.Task, error) {
+func ScanSources(cfg *config.Config, log *logmanager.Logger, prj *projectdata.Projects) ([]*task.Task, error) {
 	tasks := []*task.Task{}
 	fi, err := os.ReadDir(cfg.Declarations.InputDirectory)
 	if err != nil {
