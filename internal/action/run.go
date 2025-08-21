@@ -172,7 +172,7 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 							}
 						case task.Phase_ScanSources:
 							if err := activeTask.ScanSources(); err != nil {
-								log.Errorf("phase failed: %v", err.Error())
+								log.Warnf("phase failed: %v", err.Error())
 								continue
 							}
 							stageResult = 1
@@ -183,13 +183,15 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 							if source == "" {
 								break
 							}
-							if !strings.Contains(source, "SPO_") {
-								activeTask.ProcessingStage = task.Phase_EvaluateTrancecodingProcess
-								activeTask.InderlaceScanned = true
-								stageResult = 1
-								break
+							// if !strings.Contains(source, "SPO_") {
+							// 	activeTask.ProcessingStage = task.Phase_EvaluateTrancecodingProcess
+							// 	activeTask.InderlaceScanned = true
+							// 	stageResult = 1
+							// 	break
+							// }
+							if strings.Contains(source, "SPO_") {
+								activeTask.IsSport = true
 							}
-							activeTask.IsSport = true
 							check := scriptkit.New(filepath.ToSlash(filepath.Join(cfg.Declarations.OutputDirectory, fmt.Sprintf("/_interlace_scan_%v.sh", activeTask.OUTBASE))),
 								scriptkit.WithTemplate(scriptkit.ScanInterlace),
 								scriptkit.WithArgs(
@@ -205,13 +207,13 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 							stageResult = 1
 							activeTask.ProcessingStage = task.Phase_EvaluateInterlaceCheckResult
 						case task.Phase_EvaluateInterlaceCheckResult:
-							if err := activeTask.AssesInterlaceReport(); err != nil {
+							if err := activeTask.AssesInterlaceReport(cfg); err != nil {
 								log.Debugf("interlace check evaluation: %v", err.Error())
 								break
 							}
 							if activeTask.InderlaceScanned {
 								log.Debugf("interlace scan completed: %v", activeTask.OUTBASE)
-								log.Debugf("%v interlace=%v", activeTask.OUTBASE, activeTask.InterlaceDetected)
+								log.Debugf("%v interlace=%v ratio=%v", activeTask.OUTBASE, activeTask.InterlaceDetected, activeTask.ProgressiveRatio)
 								if activeTask.InterlaceDetected {
 									log.Noticef("%v interlace=%v", activeTask.OUTBASE, activeTask.InterlaceDetected)
 									stageResult = 1
@@ -243,39 +245,26 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 							transcodingProcess := &scriptkit.Script{}
 							scriptPath := filepath.ToSlash(filepath.Join(cfg.Declarations.OutputDirectory, fmt.Sprintf("%v.sh", activeTask.INBASE)))
 
+							args := []scriptkit.ScriptArgument{}
+							args = append(args, scriptkit.ScriptArg("source", source))
+							args = append(args, scriptkit.ScriptArg("base_with_season", activeTask.TranslitedBaseSeason()))
+							args = append(args, scriptkit.ScriptArg("outbase", activeTask.OUTBASE))
+							yadif := scriptkit.ScriptArg("yadif", "")
+							if activeTask.InterlaceDetected {
+								yadif = scriptkit.ScriptArg("yadif", "yadif,")
+							}
+							args = append(args, yadif)
+							args = append(args, scriptkit.ScriptArg("suffix_1", audioSuffixes[0]))
+
 							switch template {
 							case scriptkit.Amedia1:
-								transcodingProcess = scriptkit.New(scriptPath, scriptkit.WithTemplate(template),
-									scriptkit.WithArgs(
-										scriptkit.ScriptArg("source", source),
-										scriptkit.ScriptArg("base_with_season", activeTask.TranslitedBaseSeason()),
-										scriptkit.ScriptArg("outbase", activeTask.OUTBASE),
-										scriptkit.ScriptArg("suffix", audioSuffixes[0]),
-									),
-								)
 							case scriptkit.Amedia2:
-								transcodingProcess = scriptkit.New(scriptPath, scriptkit.WithTemplate(template),
-									scriptkit.WithArgs(
-										scriptkit.ScriptArg("source", source),
-										scriptkit.ScriptArg("base_with_season", activeTask.TranslitedBaseSeason()),
-										scriptkit.ScriptArg("outbase", activeTask.OUTBASE),
-										scriptkit.ScriptArg("suffix_1", audioSuffixes[0]),
-										scriptkit.ScriptArg("suffix_2", audioSuffixes[1]),
-									),
-								)
+								args = append(args, scriptkit.ScriptArg("suffix_2", audioSuffixes[1]))
 							case scriptkit.Amedia2S:
-								transcodingProcess = scriptkit.New(scriptPath, scriptkit.WithTemplate(template),
-									scriptkit.WithArgs(
-										scriptkit.ScriptArg("source", source),
-										scriptkit.ScriptArg("srt", srt),
-										scriptkit.ScriptArg("base_with_season", activeTask.TranslitedBaseSeason()),
-										scriptkit.ScriptArg("outbase", activeTask.OUTBASE),
-										scriptkit.ScriptArg("suffix_1", audioSuffixes[0]),
-										scriptkit.ScriptArg("suffix_2", audioSuffixes[1]),
-									),
-								)
-
+								args = append(args, scriptkit.ScriptArg("srt", srt))
+								args = append(args, scriptkit.ScriptArg("suffix_2", audioSuffixes[1]))
 							}
+							transcodingProcess = scriptkit.New(scriptPath, scriptkit.WithTemplate(template), scriptkit.WithArgs(args...))
 
 							if err := transcodingProcess.CreateScriptFile(); err != nil {
 								log.Errorf("failed to start interlace check: %v", err.Error())

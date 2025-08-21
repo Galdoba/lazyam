@@ -298,28 +298,28 @@ func (prj AmediaProject) SeasonEpisode(guid string) (int, int) {
 	return -1, -1
 }
 
-func (prj *Projects) SearchByAmediaFileKey(dir string) (AmediaProject, string) {
+func (prj *Projects) SearchByAmediaFileKey(dir string) (AmediaProject, string, string) {
 	notFound := AmediaProject{}
 	fi, err := os.ReadDir(dir)
 	if err != nil {
-		return notFound, ""
+		return notFound, "", ""
 	}
 	for _, f := range fi {
 		seridCandidate := strings.TrimSuffix(filepath.Base(f.Name()), filepath.Ext(f.Name()))
 		for _, pr := range prj.Pool {
 
 			if pr.File.Serid == seridCandidate {
-				return pr, seridCandidate
+				return pr, seridCandidate, pr.GUID
 			}
 			for _, season := range pr.Seasons {
 				for _, episode := range season.Episodes {
 					if episode.File.Serid == seridCandidate {
-						return pr, seridCandidate
+						return pr, seridCandidate, episode.GUID
 					}
 				}
 			}
 
 		}
 	}
-	return notFound, ""
+	return notFound, "", ""
 }

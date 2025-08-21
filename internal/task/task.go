@@ -30,6 +30,7 @@ type Task struct {
 	IsSport           bool                              `json:"is sport"`
 	InderlaceScanned  bool                              `json:"interlace scanned"`
 	InterlaceDetected bool                              `json:"interlace detected"`
+	ProgressiveRatio  float64                           `json:"Progressive confirmed"`
 	INBASE            string                            `json:"projected source name prefix"`
 	OUTBASE           string                            `json:"projected output name prefix"`
 }

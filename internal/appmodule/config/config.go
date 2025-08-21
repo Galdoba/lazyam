@@ -24,10 +24,11 @@ type Declarations struct {
 }
 
 type Processing struct {
-	ConfigReload          bool `toml:"reload config on each cycle"`
-	DormantMode           int  `toml:"sleep time between cycles (seconds)"`
-	CycleLockAutoremove   int  `toml:"autoremove cycle lock after (seconds)"`
-	ProjectLockAutoremove int  `toml:"autoremove project lock after (seconds)"`
+	ConfigReload          bool    `toml:"reload config on each cycle"`
+	InterlaceThreshold    float64 `toml:"non-Progressive frames to count as interlace [0 - 1.0]"`
+	DormantMode           int     `toml:"sleep time between cycles (seconds)"`
+	CycleLockAutoremove   int     `toml:"autoremove cycle lock after (seconds)"`
+	ProjectLockAutoremove int     `toml:"autoremove project lock after (seconds)"`
 }
 
 type Analitycs struct {
@@ -39,7 +40,7 @@ type Analitycs struct {
 type Logging struct {
 	Enabled      bool   `toml:"enabled"`
 	FilePath     string `toml:"log file path"`
-	FileRotation string `toml:"log file rotation [none/dayly/weekly/monthly]"`
+	FileRotation string `toml:"log file rotation [none/daily/weekly/monthly]"`
 	ConsoleColor bool   `toml:"console color output"`
 	ConsoleLevel string `toml:"write messages above level (console)"`
 	FileLevel    string `toml:"write messages above level (file)"`
@@ -57,7 +58,7 @@ func Default(paths *xdg.ProgramPaths) Config {
 		},
 		Processing: Processing{
 			ConfigReload:          false,
-			DormantMode:           3,
+			DormantMode:           30,
 			CycleLockAutoremove:   9,
 			ProjectLockAutoremove: 27,
 		},

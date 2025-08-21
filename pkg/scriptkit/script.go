@@ -38,7 +38,7 @@ func WithTemplate(template string) ScriptOption {
 	}
 }
 
-func WithArgs(args ...scriptArg) ScriptOption {
+func WithArgs(args ...ScriptArgument) ScriptOption {
 	return func(s *Script) {
 		for _, arg := range args {
 			s.args[argKeyFormat(arg.key)] = arg.value
@@ -46,13 +46,13 @@ func WithArgs(args ...scriptArg) ScriptOption {
 	}
 }
 
-type scriptArg struct {
+type ScriptArgument struct {
 	key   string
 	value any
 }
 
-func ScriptArg(key string, value any) scriptArg {
-	return scriptArg{key: key, value: value}
+func ScriptArg(key string, value any) ScriptArgument {
+	return ScriptArgument{key: key, value: value}
 }
 
 func argKeyFormat(key string) string {

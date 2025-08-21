@@ -5,9 +5,11 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strconv"
 	"strings"
 
+	"github.com/Galdoba/lazyam/internal/appmodule/config"
 	"github.com/Galdoba/lazyam/internal/mediasource"
 	"github.com/Galdoba/lazyam/internal/projectdata"
 	"github.com/Galdoba/lazyam/pkg/translit"
@@ -50,11 +52,12 @@ func (t *Task) FillMetatada(prj *projectdata.Projects) error {
 			t.AmediaFileKey = source.File.Serid
 		}
 	} else {
-		project, t.AmediaFileKey = prj.SearchByAmediaFileKey(t.Directory)
+		project, t.AmediaFileKey, t.AmediaGUID = prj.SearchByAmediaFileKey(t.Directory)
 	}
 	if project.Name() != "" {
 		t.AmediaTitleRus = project.RusTitle
 		t.AmediaTitleOri = project.OriginalTitle
+		t.Season, t.Episode = project.SeasonEpisode(t.AmediaGUID)
 		t.OUTBASE = constructOutbase(t)
 		t.INBASE = constructInbase(t)
 	} else {
@@ -101,7 +104,7 @@ func (t *Task) VideoSourceName() string {
 	return ""
 }
 
-func (t *Task) AssesInterlaceReport() error {
+func (t *Task) AssesInterlaceReport(cfg *config.Config) error {
 	fi, err := os.ReadDir(t.Directory)
 	if err != nil {
 		return fmt.Errorf("failed to read directory: %v", err)
@@ -112,15 +115,17 @@ func (t *Task) AssesInterlaceReport() error {
 		}
 		idetData, err := parseIdet(filepath.Join(t.Directory, f.Name()))
 		if err != nil {
-			return fmt.Errorf("failed to parse idet: %v", err)
+			return err
 		}
 		t.InderlaceScanned = true
-		if idetData.interlaceScore < 95 {
+		t.ProgressiveRatio = float64(idetData.interlaceScore) / 1000.0
+		threshold := int(1000 * cfg.Processing.InterlaceThreshold)
+		if idetData.interlaceScore < threshold {
 			t.InterlaceDetected = true
 		}
 		return nil
 	}
-	return fmt.Errorf("scan not complete")
+	return fmt.Errorf("scan not started")
 }
 
 type idetScan struct {
@@ -128,6 +133,8 @@ type idetScan struct {
 	interlaceScore int
 	err            error
 }
+
+var idetReg = `(.*Neither: *)(\d+)(.*Top: *)(\d+)( *Bottom: *)(\d+)(.*TFF: *)(\d+)(.*BFF: *)(\d+)(.*Progressive: *)(\d+)(.*Undetermined: *)(\d+)(.*TFF: *)(\d+)(.*BFF: *)(\d+)(.*Progressive: *)(\d+)(.*Undetermined: *)(\d+)$`
 
 func parseIdet(path string) (idetScan, error) {
 	is := idetScan{}
@@ -137,20 +144,23 @@ func parseIdet(path string) (idetScan, error) {
 		return is, err
 	}
 	if len(data) < 20 {
-		return is, fmt.Errorf("scan not finished 1")
+		return is, fmt.Errorf("scan not finished")
 	}
 	lines := strings.Split(string(data), "\n")
-	for _, line := range lines {
-		numbers := strings.Split(line, " ")
-		for _, num := range numbers {
-			if val, err := strconv.Atoi(num); err == nil {
-				is.frameCount[len(is.frameCount)] = val
-			}
+	text := strings.Join(lines, "")
+	re := regexp.MustCompile(idetReg)
+	subs := re.FindStringSubmatch(text)
+	if len(subs) != 23 {
+		return is, fmt.Errorf("failed to parse idet report: %v", path)
+	}
+	for _, s := range subs {
+		if val, err := strconv.Atoi(s); err == nil {
+			is.frameCount[len(is.frameCount)] = val
 		}
 	}
 	total := is.frameCount[7] + is.frameCount[8] + is.frameCount[9] + is.frameCount[10]
 	if total == 0 {
-		return is, fmt.Errorf("scan not finished 2")
+		return is, fmt.Errorf("scan data is inconclussive")
 	}
 	is.interlaceScore = (is.frameCount[9] * 1000) / total
 	return is, nil
