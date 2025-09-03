@@ -183,29 +183,31 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 							if source == "" {
 								break
 							}
-							// if !strings.Contains(source, "SPO_") {
-							// 	activeTask.ProcessingStage = task.Phase_EvaluateTrancecodingProcess
-							// 	activeTask.InderlaceScanned = true
-							// 	stageResult = 1
-							// 	break
-							// }
-							if strings.Contains(source, "SPO_") {
+
+							switch strings.Contains(source, "SPO_") {
+							case true:
 								activeTask.IsSport = true
-							}
-							check := scriptkit.New(filepath.ToSlash(filepath.Join(cfg.Declarations.OutputDirectory, fmt.Sprintf("/_interlace_scan_%v.sh", activeTask.OUTBASE))),
-								scriptkit.WithTemplate(scriptkit.ScanInterlace),
-								scriptkit.WithArgs(
-									scriptkit.ScriptArg("file", activeTask.VideoSourceName()),
-									scriptkit.ScriptArg("directory", toLinuxPath(activeTask.Directory)),
-								),
-							)
-							if err := check.CreateScriptFile(); err != nil {
-								log.Errorf("failed to start interlace check: %v", err.Error())
+								check := scriptkit.New(filepath.ToSlash(filepath.Join(cfg.Declarations.OutputDirectory, fmt.Sprintf("/_interlace_scan_%v.sh", activeTask.OUTBASE))),
+									scriptkit.WithTemplate(scriptkit.ScanInterlace),
+									scriptkit.WithArgs(
+										scriptkit.ScriptArg("file", activeTask.VideoSourceName()),
+										scriptkit.ScriptArg("directory", toLinuxPath(activeTask.Directory)),
+									),
+								)
+								if err := check.CreateScriptFile(); err != nil {
+									log.Errorf("failed to start interlace check: %v", err.Error())
+									break
+								}
+								log.Infof("interlace detection script generated: %v", check.Path())
+								stageResult = 1
+								activeTask.ProcessingStage = task.Phase_EvaluateInterlaceCheckResult
+							case false:
+								activeTask.ProcessingStage = task.Phase_EvaluateTrancecodingProcess
+								activeTask.InderlaceScanned = true
+								stageResult = 1
 								break
 							}
-							log.Infof("start interlace check: %v", check.Path())
-							stageResult = 1
-							activeTask.ProcessingStage = task.Phase_EvaluateInterlaceCheckResult
+
 						case task.Phase_EvaluateInterlaceCheckResult:
 							if err := activeTask.AssesInterlaceReport(cfg); err != nil {
 								log.Debugf("interlace check evaluation: %v", err.Error())
@@ -270,7 +272,7 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 								log.Errorf("failed to start interlace check: %v", err.Error())
 								break
 							}
-							log.Infof("start transcode check: %v", transcodingProcess.Path())
+							log.Infof("transcoding script generated: %v", transcodingProcess.Path())
 							activeTask.ProcessingStage = task.Phase_WaitTranceCodingResult
 							stageResult = 1
 						}

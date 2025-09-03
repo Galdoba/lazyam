@@ -29,21 +29,54 @@ const (
 
 func (t *Task) FillMetatada(prj *projectdata.Projects) error {
 	t.PRT = strings.TrimPrefix(getPRT(t.Directory), "_")
-	source := taskMeta{}
+	// source := taskMeta{}
 	t.PRT = getPRT(t.Directory)
 	t.AmediaFileKey = ""
 	project := projectdata.AmediaProject{}
+	project, err := t.fillFromIndividualMeta(prj)
+	if err != nil {
+		project, t.AmediaFileKey, t.AmediaGUID = prj.SearchByAmediaFileKey(t.Directory)
+	}
 
+	if project.Name() != "" {
+
+		if t.AmediaTitleOri == "" {
+			t.AmediaTitleOri = project.OriginalTitle
+		}
+		if t.AmediaTitleRus == "" {
+			t.AmediaTitleRus = project.RusTitle
+		}
+		t.Season, t.Episode = project.SeasonEpisode(t.AmediaGUID)
+
+	}
+	t.OUTBASE = constructOutbase(t)
+	t.INBASE = constructInbase(t)
+
+	return nil
+}
+
+func (t *Task) fillFromIndividualMeta(prj *projectdata.Projects) (projectdata.AmediaProject, error) {
+	source := taskMeta{}
+	project := projectdata.AmediaProject{}
 	if meta, ok := t.SignalFiles["metadata"]; ok {
 		data, err := os.ReadFile(meta)
 		if err != nil {
-			return fmt.Errorf("failed to read: %v", err)
+			return project, fmt.Errorf("failed to read: %v", err)
 		}
 		if err := json.Unmarshal(data, &source); err != nil {
-			return fmt.Errorf("failed to unmarshal: %v", err)
+			os.Rename(meta, meta+".bad")
+			return project, fmt.Errorf("failed to unmarshal file: %v (%v)", meta, err)
 		}
 		project = prj.SearchByGUID(source.GUID)
+		if project.GUID == "" {
+			fmt.Println("search by guid not found")
+		}
+		// if project == projectdata.AmediaProject{} {
+		// 	fmt.Println("search by guid not found")
+		// }
 		t.AmediaGUID = source.GUID
+		t.AmediaTitleOri = source.TitleOri
+		t.AmediaTitleRus = source.TitleRus
 		if source.GUID != project.GUID {
 			t.Type = "SER"
 			t.Season, t.Episode = project.SeasonEpisode(t.AmediaGUID)
@@ -52,20 +85,9 @@ func (t *Task) FillMetatada(prj *projectdata.Projects) error {
 			t.AmediaFileKey = source.File.Serid
 		}
 	} else {
-		project, t.AmediaFileKey, t.AmediaGUID = prj.SearchByAmediaFileKey(t.Directory)
+		return project, fmt.Errorf("metadata file absent")
 	}
-	if project.Name() != "" {
-		t.AmediaTitleRus = project.RusTitle
-		t.AmediaTitleOri = project.OriginalTitle
-		t.Season, t.Episode = project.SeasonEpisode(t.AmediaGUID)
-		t.OUTBASE = constructOutbase(t)
-		t.INBASE = constructInbase(t)
-	} else {
-		t.OUTBASE = filepath.Base(t.Directory)
-		t.INBASE = filepath.Base(t.Directory)
-	}
-
-	return nil
+	return project, nil
 }
 
 func (t *Task) ScanSources() error {
@@ -193,8 +215,8 @@ func (t *Task) Suffixes() []string {
 		if len(v.Languages) == 0 {
 			continue
 		}
-		for _, lang := range v.Languages {
-			suf = append(suf, "AUDIO"+strings.ToUpper(lang)+v.Layout[0])
+		for l, lang := range v.Languages {
+			suf = append(suf, "AUDIO"+strings.ToUpper(lang)+v.Layout[l])
 		}
 	}
 	return suf

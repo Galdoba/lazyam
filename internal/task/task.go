@@ -33,6 +33,7 @@ type Task struct {
 	ProgressiveRatio  float64                           `json:"Progressive confirmed"`
 	INBASE            string                            `json:"projected source name prefix"`
 	OUTBASE           string                            `json:"projected output name prefix"`
+	undefined         bool
 }
 
 func New(directory string) *Task {
@@ -89,11 +90,37 @@ func (t *Task) CollectSignals() error {
 }
 
 type taskMeta struct {
-	GUID string           `json:"guid,omitempty"`
-	File projectdata.File `json:"file,omitempty"`
+	GUID     string           `json:"guid,omitempty"`
+	File     projectdata.File `json:"file,omitempty"`
+	TitleOri string           `json:"original_title",omitempty"`
+	TitleRus string           `json:"rus_title",omitempty"`
+
+	/*
+			"guid": "FRDAE0000",
+		    "start_date": "2025-09-01T00:00:00+03:00",
+		    "end_date": null,
+		    "year": 2016,
+		    "file": {
+		        "serid": "MOV_00223_18",
+		        "duration": 7259.0
+		    },
+		    "original_title": "Rules Don't Apply",
+		    "rus_title": "Вне правил",
+		    "age_restriction": null,
+		    "genre": null,
+		    "country": null,
+		    "directors": null,
+		    "actors": null,
+		    "rus_description": "",
+		    "imdb_id": null,
+		    "kinopoisk_id": null,
+		    "quote": null,
+		    "quote_author": null
+	*/
 }
 
 func getPRT(str string) string {
+	str = strings.ToUpper(str)
 	re := regexp.MustCompile(`(PRT[0-9]+)`)
 	prt := re.FindString(str)
 	return prt
@@ -103,6 +130,10 @@ func constructOutbase(t *Task) string {
 	title := t.AmediaTitleRus
 	if title == "" {
 		title = t.AmediaTitleOri
+	}
+	if title == "" {
+		t.undefined = true
+		return filepath.Base(t.Directory)
 	}
 
 	tags := []string{
@@ -117,6 +148,9 @@ func constructInbase(t *Task) string {
 	title := t.AmediaTitleRus
 	if title == "" {
 		title = t.AmediaTitleOri
+	}
+	if title == "" {
+		return filepath.Base(t.Directory)
 	}
 
 	tags := []string{
