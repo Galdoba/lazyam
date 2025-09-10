@@ -25,7 +25,7 @@ func ScanSources(cfg *config.Config, log *logmanager.Logger, prj *projectdata.Pr
 		tsk := &task.Task{
 			Directory: filepath.Join(cfg.Declarations.InputDirectory, f.Name()),
 		}
-		switch err := tsk.FillMetatada(prj); err {
+		switch err := tsk.FillMetatada(prj, log); err {
 		case nil:
 			log.Tracef("metadata filled for %v", tsk.OUTBASE)
 		default:

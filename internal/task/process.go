@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/Galdoba/appcontext/logmanager"
 	"github.com/Galdoba/lazyam/internal/appmodule/config"
 	"github.com/Galdoba/lazyam/internal/mediasource"
 	"github.com/Galdoba/lazyam/internal/projectdata"
@@ -27,13 +28,13 @@ const (
 	Phase_CleanData
 )
 
-func (t *Task) FillMetatada(prj *projectdata.Projects) error {
+func (t *Task) FillMetatada(prj *projectdata.Projects, logger *logmanager.Logger) error {
 	t.PRT = strings.TrimPrefix(getPRT(t.Directory), "_")
 	// source := taskMeta{}
 	t.PRT = getPRT(t.Directory)
 	t.AmediaFileKey = ""
 	project := projectdata.AmediaProject{}
-	project, err := t.fillFromIndividualMeta(prj)
+	project, err := t.fillFromIndividualMeta(prj, logger)
 	if err != nil {
 		project, t.AmediaFileKey, t.AmediaGUID = prj.SearchByAmediaFileKey(t.Directory)
 	}
@@ -55,7 +56,7 @@ func (t *Task) FillMetatada(prj *projectdata.Projects) error {
 	return nil
 }
 
-func (t *Task) fillFromIndividualMeta(prj *projectdata.Projects) (projectdata.AmediaProject, error) {
+func (t *Task) fillFromIndividualMeta(prj *projectdata.Projects, logger *logmanager.Logger) (projectdata.AmediaProject, error) {
 	source := taskMeta{}
 	project := projectdata.AmediaProject{}
 	if meta, ok := t.SignalFiles["metadata"]; ok {
@@ -69,7 +70,7 @@ func (t *Task) fillFromIndividualMeta(prj *projectdata.Projects) (projectdata.Am
 		}
 		project = prj.SearchByGUID(source.GUID)
 		if project.GUID == "" {
-			fmt.Println("search by guid not found")
+			logger.Warnf("no data by guid: %v", source.TitleRus)
 		}
 		// if project == projectdata.AmediaProject{} {
 		// 	fmt.Println("search by guid not found")

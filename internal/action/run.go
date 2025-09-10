@@ -21,9 +21,11 @@ import (
 )
 
 const (
-	cycleStage_ReadCache = iota
+	cycleStage_CheckLock = iota
+	cycleStage_ReadCache
 	cycleStage_UpdateCache
 	cycleStage_ProjectProcessing
+	cycleStage_TrailerProcessing
 	cycleStage_Sleep
 )
 
@@ -40,12 +42,17 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 
 		cycle := 1
 		breakinError := false
-		cycleStage := cycleStage_ReadCache
+		cycleStage := cycleStage_CheckLock
 		projects := projectdata.NewProjects()
 		tasklist := task.NewTaskList()
 		// activeTasks := make(map[string]*task.Task)
 		for !breakinError {
 			switch cycleStage {
+			case cycleStage_CheckLock:
+				if err := actionstage.CheckLock(cfg, log); err != nil {
+					log.Errorf("failed to check lock: %v", err.Error())
+				}
+				cycleStage = cycleStage_ReadCache
 			case cycleStage_ReadCache:
 				cachePath := cfg.Declarations.ProjectCacheFile
 				loadedMeta, err := actionstage.LoadMetadataCache(cachePath)
@@ -154,7 +161,7 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 						switch activeTask.ProcessingStage {
 						case task.Phase_SyncMeta:
 							activeTask.CollectSignals()
-							err := activeTask.FillMetatada(projects)
+							err := activeTask.FillMetatada(projects, actx.Log)
 							switch err {
 							case nil:
 								stageResult = 1
@@ -281,9 +288,31 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 				}
 
 				cycleStage++
+			case cycleStage_TrailerProcessing:
+				dir := cfg.Declarations.OutputDirectory
+				fi, err := os.ReadDir(dir)
+				if err != nil {
+					log.Errorf("failed to check trailers: %v", err.Error())
+				}
+				for _, f := range fi {
+					if f.IsDir() {
+						continue
+					}
+					path := filepath.Join(dir, f.Name())
+					if actionstage.IsAmediaTrailer(path) {
+						err := actionstage.WriteScript(cfg, path)
+						switch err {
+						case nil:
+							log.Infof("trailer script for %v complete", f.Name())
+						default:
+							log.Errorf("trailer script for %v failed", f.Name())
+						}
+					}
+				}
+				cycleStage++
 			case cycleStage_Sleep:
 				actionstage.Sleep(cfg.Processing.DormantMode)
-				cycleStage = cycleStage_ReadCache
+				cycleStage = cycleStage_CheckLock
 				cycle++
 			}
 

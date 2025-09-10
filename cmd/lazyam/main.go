@@ -22,7 +22,7 @@ func main() {
 	}
 	cmd := cli.Command{
 		Name:        declare.APP_NAME,
-		Version:     "0.3.0",
+		Version:     "0.4.1",
 		Description: "Automatic amedia content transcoding.",
 		Action:      action.Process(actx),
 
