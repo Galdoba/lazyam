@@ -123,6 +123,9 @@ func getPRT(str string) string {
 	str = strings.ToUpper(str)
 	re := regexp.MustCompile(`(PRT[0-9]+)`)
 	prt := re.FindString(str)
+	if prt == "" {
+		prt = fmt.Sprintf("PRT000000000000")
+	}
 	return prt
 }
 
