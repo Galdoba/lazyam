@@ -25,6 +25,7 @@ func (sc *Script) CreateScriptFile() error {
 	if err := sc.Validate(); err != nil {
 		return fmt.Errorf("script validation failed: %v", err)
 	}
+
 	f, err := os.OpenFile(sc.path, os.O_CREATE|os.O_TRUNC|os.O_WRONLY, sc.permission)
 	if err != nil {
 		return fmt.Errorf("failed create file: %v", err)

@@ -370,6 +370,7 @@ func moveSources(cfg *config.Config, t *task.Task, sources ...string) error {
 		if err := os.Rename(from, to); err != nil {
 			return err
 		}
+
 	}
 	return nil
 }

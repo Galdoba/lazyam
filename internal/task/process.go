@@ -1,7 +1,6 @@
 package task
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -29,67 +28,143 @@ const (
 )
 
 func (t *Task) FillMetatada(prj *projectdata.Projects, logger *logmanager.Logger) error {
-	t.PRT = strings.TrimPrefix(getPRT(t.Directory), "_")
-	// source := taskMeta{}
-	t.PRT = getPRT(t.Directory)
-	t.AmediaFileKey = ""
-	project := projectdata.AmediaProject{}
-	project, err := t.fillFromIndividualMeta(prj, logger)
+
+	list, err := getActualFileKeysCandidates(t.Directory)
 	if err != nil {
-		project, t.AmediaFileKey, t.AmediaGUID = prj.SearchByAmediaFileKey(t.Directory)
+		return fmt.Errorf("failed to get filekey candidates: %v", err)
+	}
+	if len(list) == 0 {
+		logger.Warnf("no keys found: %v", t.Directory)
+		return nil
 	}
 
-	if project.Name() != "" {
+	project := projectdata.AmediaProject{}
+	fallbackMode := true
+	for _, key := range list {
+		project, err = prj.SearchMasterFileByAmediaFileKey(key)
+		if err != nil {
+			logger.Warnf("key %v: not found in global data", key)
+		} else {
+			logger.Infof("key %v: found in global data", key)
+			t.AmediaFileKey = key
+			t.AmediaGUID = project.GUID
+			t.Season, t.Episode = project.SeasonEpisodeByFilekey(key)
+			fallbackMode = false
+			break
+		}
+		//////////
+		project, err = SearchLocalByAmediaFileKey(t.SignalFiles["metadata"], key)
+		if err != nil {
+			logger.Warnf("key %v: search failed: %v", key, err.Error())
+		} else {
+			logger.Infof("key %v: found in local data", key)
+			t.AmediaFileKey = key
+			t.AmediaGUID = project.GUID
+			t.AmediaTitleOri = project.OriginalTitle
+			t.AmediaTitleRus = project.RusTitle
+			t.Season, t.Episode = project.SeasonEpisodeByFilekey(key)
+			fallbackMode = false
+			break
+		}
 
+	}
+	t.PRT = strings.TrimPrefix(getPRT(t.Directory), "_")
+	t.PRT = getPRT(t.Directory)
+	switch fallbackMode {
+	case true:
+		logger.Warnf("fallback %v to %s transcoding method", "no metadata", t.Directory)
+		t.PRT = strings.TrimPrefix(getPRT(t.Directory), "_")
+		t.PRT = getPRT(t.Directory)
+	case false:
 		if t.AmediaTitleOri == "" {
 			t.AmediaTitleOri = project.OriginalTitle
 		}
 		if t.AmediaTitleRus == "" {
 			t.AmediaTitleRus = project.RusTitle
 		}
-		t.Season, t.Episode = project.SeasonEpisode(t.AmediaGUID)
+		keys := append(project.GUID_Candidates, t.AmediaFileKey)
+		if t.Season < 1 {
+			t.Season = int(prj.SearchSeason(keys...))
+		}
+		if t.Episode < 1 {
+			t.Episode = int(prj.SearchEpisode(keys...))
+		}
+		if t.AmediaTitleOri == "" || t.AmediaTitleRus == "" {
+			t.AmediaTitleRus, t.AmediaTitleOri = prj.SearchTitles(keys...)
+		}
 
 	}
 	t.OUTBASE = constructOutbase(t)
 	t.INBASE = constructInbase(t)
-
 	return nil
 }
 
-func (t *Task) fillFromIndividualMeta(prj *projectdata.Projects, logger *logmanager.Logger) (projectdata.AmediaProject, error) {
-	source := taskMeta{}
-	project := projectdata.AmediaProject{}
-	if meta, ok := t.SignalFiles["metadata"]; ok {
-		data, err := os.ReadFile(meta)
-		if err != nil {
-			return project, fmt.Errorf("failed to read: %v", err)
-		}
-		if err := json.Unmarshal(data, &source); err != nil {
-			os.Rename(meta, meta+".bad")
-			return project, fmt.Errorf("failed to unmarshal file: %v (%v)", meta, err)
-		}
-		project = prj.SearchByGUID(source.GUID)
-		if project.GUID == "" {
-			logger.Warnf("no data by guid: %v", source.TitleRus)
-		}
-		// if project == projectdata.AmediaProject{} {
-		// 	fmt.Println("search by guid not found")
-		// }
-		t.AmediaGUID = source.GUID
-		t.AmediaTitleOri = source.TitleOri
-		t.AmediaTitleRus = source.TitleRus
-		if source.GUID != project.GUID {
-			t.Type = "SER"
-			t.Season, t.Episode = project.SeasonEpisode(t.AmediaGUID)
-		}
-		if source.File.Serid != "" {
-			t.AmediaFileKey = source.File.Serid
-		}
-	} else {
-		return project, fmt.Errorf("metadata file absent")
+func getActualFileKeysCandidates(dir string) ([]string, error) {
+	list := []string{}
+	fi, err := os.ReadDir(dir)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read directory: %v", err)
 	}
-	return project, nil
+fileLoop:
+	for _, f := range fi {
+		if f.IsDir() {
+			continue
+		}
+		ext := filepath.Ext(f.Name())
+		base := strings.TrimSuffix(f.Name(), ext)
+		switch ext {
+		case ".json", ".idet", "lock", "":
+			continue
+		default:
+			for _, has := range list {
+				if base == has {
+					continue fileLoop
+				}
+			}
+			list = append(list, base)
+		}
+
+	}
+	return list, nil
 }
+
+// func (t *Task) fillFromIndividualMeta(prj *projectdata.Projects, logger *logmanager.Logger) (projectdata.AmediaProject, error) {
+// 	source := taskMeta{}
+// 	project := projectdata.AmediaProject{}
+// 	if meta, ok := t.SignalFiles["metadata"]; ok {
+// 		data, err := os.ReadFile(meta)
+// 		if err != nil {
+// 			return project, fmt.Errorf("failed to read: %v", err)
+// 		}
+// 		fmt.Println("found data:")
+// 		fmt.Println(string(data))
+// 		if err := json.Unmarshal(data, &source); err != nil {
+// 			os.Rename(meta, meta+".bad")
+// 			return project, fmt.Errorf("failed to unmarshal file: %v (%v)", meta, err)
+// 		}
+// 		fmt.Println(source)
+// 		project = prj.SearchByGUID(source.GUID)
+// 		if project.GUID == "" {
+// 			logger.Warnf("no data by guid: %v", source.TitleRus)
+// 		}
+// 		// if project == projectdata.AmediaProject{} {
+// 		// 	fmt.Println("search by guid not found")
+// 		// }
+// 		t.AmediaGUID = source.GUID
+// 		t.AmediaTitleOri = source.TitleOri
+// 		t.AmediaTitleRus = source.TitleRus
+// 		if source.GUID != project.GUID {
+// 			t.Type = "SER"
+// 			t.Season, t.Episode = project.SeasonEpisode(t.AmediaGUID)
+// 		}
+// 		if source.Serid != "" {
+// 			t.AmediaFileKey = source.Serid
+// 		}
+// 	} else {
+// 		return project, fmt.Errorf("metadata file absent")
+// 	}
+// 	return project, nil
+// }
 
 func (t *Task) ScanSources() error {
 	fi, err := os.ReadDir(t.Directory)
@@ -221,4 +296,52 @@ func (t *Task) Suffixes() []string {
 		}
 	}
 	return suf
+}
+
+func SearchLocalByAmediaFileKey(path, filekey string) (projectdata.AmediaProject, error) {
+
+	project := projectdata.AmediaProject{}
+	if path == "" {
+		return project, fmt.Errorf("no local metadata provided")
+	}
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return project, fmt.Errorf("failed to read file %v: %v", path, err)
+	}
+	source, err := extractMeta(data)
+	if err != nil {
+		return project, fmt.Errorf("failed to extract metadata: %v", err)
+	}
+	project.GUID = source.TITLE_GUID
+	project.RusTitle = source.TitleRus
+	project.OriginalTitle = source.TitleOri
+	project.GUID_Candidates = append(project.GUID_Candidates, source.GUID, source.SEASON_GUID, source.TITLE_GUID)
+	seasNum := extractNumber(source.SeasonName)
+	project.Seasons = append(project.Seasons, projectdata.Season{
+		Actors:      "",
+		CmsID:       0,
+		Directors:   "",
+		OrderNumber: int64(seasNum),
+		GUID:        source.SEASON_GUID,
+		Episodes: []projectdata.Episode{
+			{
+				GUID:        source.GUID,
+				OrderNumber: source.Episode_Num,
+			},
+		},
+	})
+	return project, nil
+}
+
+func extractNumber(s string) int {
+	ns := ""
+	for _, chr := range strings.Split(s, "") {
+		switch chr {
+		case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
+			ns += chr
+		}
+	}
+
+	n, _ := strconv.Atoi(ns)
+	return n
 }

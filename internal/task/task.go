@@ -1,14 +1,18 @@
 package task
 
 import (
+	"encoding/json"
+	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
+	"reflect"
 	"regexp"
+	"strconv"
 	"strings"
+	"time"
 
 	"github.com/Galdoba/lazyam/internal/mediasource"
-	"github.com/Galdoba/lazyam/internal/projectdata"
 	"github.com/Galdoba/lazyam/pkg/translit"
 )
 
@@ -90,43 +94,207 @@ func (t *Task) CollectSignals() error {
 }
 
 type taskMeta struct {
-	GUID     string           `json:"guid,omitempty"`
-	File     projectdata.File `json:"file,omitempty"`
-	TitleOri string           `json:"original_title",omitempty"`
-	TitleRus string           `json:"rus_title",omitempty"`
-
-	/*
-			"guid": "FRDAE0000",
-		    "start_date": "2025-09-01T00:00:00+03:00",
-		    "end_date": null,
-		    "year": 2016,
-		    "file": {
-		        "serid": "MOV_00223_18",
-		        "duration": 7259.0
-		    },
-		    "original_title": "Rules Don't Apply",
-		    "rus_title": "Вне правил",
-		    "age_restriction": null,
-		    "genre": null,
-		    "country": null,
-		    "directors": null,
-		    "actors": null,
-		    "rus_description": "",
-		    "imdb_id": null,
-		    "kinopoisk_id": null,
-		    "quote": null,
-		    "quote_author": null
-	*/
+	GUID        string  `json:"guid,omitempty"`
+	TITLE_GUID  string  `json:"title_guid,omitempty"`
+	SEASON_GUID string  `json:"season_guid,omitempty"`
+	TitleOri    string  `json:"original_title",omitempty"`
+	TitleRus    string  `json:"rus_title",omitempty"`
+	Serid       string  `json:"serid,omitempty"`
+	Duration    float64 `json:"duration,omitempty"`
+	SeasonName  string  `json:"orig_name,omitempty"`
+	Season_Num  int64   `json:"season_num,omitempty"`
+	Episode_Num int64   `json:"episode_num,omitempty"`
 }
+
+// ///////////////////////////////////
+// AI GENERATED
+// type taskMeta struct {
+// 	GUID     string  `json:"guid,omitempty"`
+// 	TitleOri string  `json:"original_title,omitempty"`
+// 	TitleRus string  `json:"rus_title,omitempty"`
+// 	Serid    string  `json:"serid,omitempty"`
+// 	Duration float64 `json:"duration,omitempty"`
+// }
+
+// extractMeta извлекает метаданные из JSON с дополнительными проверками
+func extractMeta(data []byte) (taskMeta, error) {
+	var result taskMeta
+	var unmarshaled interface{}
+
+	// Проверка 1: Декодирование JSON
+	if err := json.Unmarshal(data, &unmarshaled); err != nil {
+		return result, fmt.Errorf("failed json unmarshaling: %v", err)
+	}
+
+	// Рекурсивно обходим структуру
+	extractFields(unmarshaled, &result)
+
+	// Проверка 2: Хотя бы одно поле должно быть заполнено
+	if isEmptyMeta(result) {
+		return result, errors.New("no usefull metadata found")
+	}
+
+	return result, nil
+}
+
+// isEmptyMeta проверяет, все ли поля структуры пустые
+func isEmptyMeta(meta taskMeta) bool {
+	return meta.GUID == "" &&
+		meta.TitleOri == "" &&
+		meta.TitleRus == "" &&
+		meta.Serid == "" &&
+		meta.Duration == 0 &&
+		meta.SeasonName == "" &&
+		meta.Season_Num == 0 &&
+		meta.Episode_Num == 0
+}
+
+// Остальные функции остаются без изменений
+func extractFields(data interface{}, result *taskMeta) {
+	if data == nil {
+		return
+	}
+
+	value := reflect.ValueOf(data)
+	if !value.IsValid() {
+		return
+	}
+
+	switch value.Kind() {
+	case reflect.Map:
+		iter := value.MapRange()
+		for iter.Next() {
+			k := iter.Key()
+			v := iter.Value()
+
+			// Проверяем и разыменовываем интерфейсы
+			if k.IsValid() && k.Kind() == reflect.Interface {
+				k = k.Elem()
+			}
+			if v.IsValid() && v.Kind() == reflect.Interface {
+				v = v.Elem()
+			}
+
+			if k.IsValid() && k.Kind() == reflect.String {
+				key := k.String()
+				if v.IsValid() {
+					processKeyValue(key, v.Interface(), result)
+				}
+			}
+
+			// Рекурсивно обходим вложенные структуры
+			if v.IsValid() {
+				extractFields(v.Interface(), result)
+			}
+		}
+
+	case reflect.Slice, reflect.Array:
+		for i := 0; i < value.Len(); i++ {
+			item := value.Index(i)
+			if item.IsValid() && item.Kind() == reflect.Interface {
+				item = item.Elem()
+			}
+			if item.IsValid() {
+				extractFields(item.Interface(), result)
+			}
+		}
+
+	default:
+		// Для простых типов ничего не делаем
+	}
+}
+
+func processKeyValue(key string, value interface{}, result *taskMeta) {
+	if value == nil {
+		return
+	}
+
+	switch key {
+	case "guid":
+		if str, ok := value.(string); ok {
+			result.GUID = str
+		}
+	case "title_guid":
+		if str, ok := value.(string); ok {
+			result.TITLE_GUID = str
+		}
+	case "season_guid":
+		if str, ok := value.(string); ok {
+			result.SEASON_GUID = str
+		}
+	case "original_title":
+		if str, ok := value.(string); ok {
+			result.TitleOri = str
+		}
+	case "rus_title":
+		if str, ok := value.(string); ok {
+			result.TitleRus = str
+		}
+	case "serid":
+		if str, ok := value.(string); ok {
+			result.Serid = str
+		}
+	case "duration":
+		switch v := value.(type) {
+		case float64:
+			result.Duration = v
+		case int:
+			result.Duration = float64(v)
+		case int64:
+			result.Duration = float64(v)
+		case float32:
+			result.Duration = float64(v)
+		case string:
+			if f, err := strconv.ParseFloat(v, 64); err == nil {
+				result.Duration = f
+			}
+		}
+	case "orig_name":
+		if str, ok := value.(string); ok {
+			result.SeasonName = str
+		}
+	case "season_num":
+		switch v := value.(type) {
+		case int64:
+			result.Season_Num = v
+		case float64:
+			result.Season_Num = int64(v)
+		case string:
+			if i, err := strconv.Atoi(v); err == nil {
+				result.Season_Num = int64(i)
+			}
+		}
+	case "episode_num", "order_number":
+		switch v := value.(type) {
+		case int64:
+			result.Episode_Num = v
+		case float64:
+			result.Episode_Num = int64(v)
+		case string:
+			if i, err := strconv.Atoi(v); err == nil {
+				result.Episode_Num = int64(i)
+			}
+		}
+	}
+}
+
+////////////////////////////////////
 
 func getPRT(str string) string {
 	str = strings.ToUpper(str)
 	re := regexp.MustCompile(`(PRT[0-9]+)`)
 	prt := re.FindString(str)
 	if prt == "" {
-		prt = fmt.Sprintf("PRT000000000000")
+		prt = fmt.Sprintf("PRT%v000000", today())
+	}
+	for len(prt) < 15 {
+		prt += "0"
 	}
 	return prt
+}
+
+func today() string {
+	return time.Now().Format("060102")
 }
 
 func constructOutbase(t *Task) string {
@@ -135,7 +303,7 @@ func constructOutbase(t *Task) string {
 		title = t.AmediaTitleOri
 	}
 	if title == "" {
-		t.undefined = true
+		//t.undefined = true
 		return filepath.Base(t.Directory)
 	}
 

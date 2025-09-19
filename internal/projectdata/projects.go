@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"path/filepath"
-	"strings"
 	"time"
 
 	"github.com/Galdoba/appcontext/logmanager"
@@ -76,6 +74,7 @@ type AmediaProject struct {
 	StartDate           string   `json:"start_date,omitempty"`
 	Year                int64    `json:"year,omitempty"`
 	OriginalBroadcaster string   `json:"original_broadcaster,omitempty"`
+	GUID_Candidates     []string `json:"guidcandidates,omitempty"`
 }
 
 func NewProjects() *Projects {
@@ -138,18 +137,6 @@ func (ap AmediaProject) Name() string {
 	return ap.GUID
 }
 
-func wantUpdate0(cacheUpdateTimestamp, metadataFile string) (bool, error) {
-	// fc, err := os.Stat(cacheFile)
-	// if err != nil {
-	// 	return false, err
-	// }
-	fm, err := os.Stat(metadataFile)
-	if err != nil {
-		return false, err
-	}
-
-	return fm.ModTime().Format(time.DateTime) == cacheUpdateTimestamp, nil
-}
 func wantUpdate(projects *Projects, metadataUpdateTime time.Time) bool {
 	if len(projects.Pool) == 0 {
 		return true
@@ -281,16 +268,40 @@ func (pr *Projects) SearchByGUID(guid string) AmediaProject {
 	return notFound
 }
 
-func (prj AmediaProject) SeasonEpisode(guid string) (int, int) {
-	if prj.GUID == guid {
+func (prj AmediaProject) SeasonEpisodeByGUID() (int, int) {
+	for _, guid := range prj.GUID_Candidates {
+		// if len(prj.Seasons) == 1 && len(prj.Seasons[0].Episodes) == 1 {
+		// 	fmt.Println("one escape", int(prj.Seasons[0].OrderNumber), int(prj.Seasons[0].Episodes[0].OrderNumber))
+		// 	return int(prj.Seasons[0].OrderNumber), int(prj.Seasons[0].Episodes[0].OrderNumber)
+		// }
+		// if prj.GUID == guid {
+		// 	return 0, 0
+		// }
+		for _, season := range prj.Seasons {
+			if season.GUID == guid {
+				return int(season.OrderNumber), 0
+			}
+			for _, episode := range season.Episodes {
+				if episode.GUID == guid {
+
+					return int(season.OrderNumber), int(episode.OrderNumber)
+				}
+			}
+		}
+	}
+	return -1, -1
+}
+
+func (prj AmediaProject) SeasonEpisodeByFilekey(filekey string) (int, int) {
+	if len(prj.Seasons) == 1 && len(prj.Seasons[0].Episodes) == 1 {
+		return int(prj.Seasons[0].OrderNumber), int(prj.Seasons[0].Episodes[0].OrderNumber)
+	}
+	if prj.GUID == filekey {
 		return 0, 0
 	}
 	for _, season := range prj.Seasons {
-		if season.GUID == guid {
-			return int(season.OrderNumber), 0
-		}
 		for _, episode := range season.Episodes {
-			if episode.GUID == guid {
+			if episode.File.Serid == filekey {
 				return int(season.OrderNumber), int(episode.OrderNumber)
 			}
 		}
@@ -298,28 +309,103 @@ func (prj AmediaProject) SeasonEpisode(guid string) (int, int) {
 	return -1, -1
 }
 
-func (prj *Projects) SearchByAmediaFileKey(dir string) (AmediaProject, string, string) {
+func (prj *Projects) SearchMasterFileByAmediaFileKey(filekey string) (AmediaProject, error) {
 	notFound := AmediaProject{}
-	fi, err := os.ReadDir(dir)
-	if err != nil {
-		return notFound, "", ""
+	for _, pr := range prj.Pool {
+		if pr.File.Serid == filekey {
+			return pr, nil
+		}
+		for _, season := range pr.Seasons {
+			for _, episode := range season.Episodes {
+				if episode.File.Serid == filekey {
+					return pr, nil
+				}
+			}
+		}
 	}
-	for _, f := range fi {
-		seridCandidate := strings.TrimSuffix(filepath.Base(f.Name()), filepath.Ext(f.Name()))
-		for _, pr := range prj.Pool {
+	return notFound, fmt.Errorf("not found")
+}
 
-			if pr.File.Serid == seridCandidate {
-				return pr, seridCandidate, pr.GUID
+func (prj *Projects) SearchSeason(keys ...string) int64 {
+	found := -1
+	for _, key := range keys {
+		for _, pr := range prj.Pool {
+			if pr.GUID == key {
+				return 0
+			}
+			if pr.File.Serid == key {
+				return 0
 			}
 			for _, season := range pr.Seasons {
+				if season.GUID == key {
+					return season.OrderNumber
+				}
 				for _, episode := range season.Episodes {
-					if episode.File.Serid == seridCandidate {
-						return pr, seridCandidate, episode.GUID
+					if episode.GUID == key {
+						return season.OrderNumber
+					}
+					if episode.File.Serid == key {
+						return season.OrderNumber
 					}
 				}
 			}
-
 		}
 	}
-	return notFound, "", ""
+	return int64(found)
+}
+
+func (prj *Projects) SearchEpisode(keys ...string) int64 {
+	found := -1
+	for _, key := range keys {
+		for _, pr := range prj.Pool {
+			if pr.GUID == key {
+				return 0
+			}
+			if pr.File.Serid == key {
+				return 0
+			}
+			for _, season := range pr.Seasons {
+
+				if season.GUID == key {
+					return 0
+				}
+				for _, episode := range season.Episodes {
+					if episode.GUID == key {
+						return episode.OrderNumber
+					}
+					if episode.File.Serid == key {
+						return episode.OrderNumber
+					}
+				}
+			}
+		}
+	}
+	return int64(found)
+}
+
+func (prj *Projects) SearchTitles(keys ...string) (string, string) {
+	for _, key := range keys {
+		for _, pr := range prj.Pool {
+			if pr.GUID == key {
+				return pr.RusTitle, pr.OriginalTitle
+			}
+			if pr.File.Serid == key {
+				return pr.RusTitle, pr.OriginalTitle
+			}
+			for _, season := range pr.Seasons {
+				if season.GUID == key {
+					return pr.RusTitle, pr.OriginalTitle
+				}
+				for _, episode := range season.Episodes {
+					if episode.GUID == key {
+						return pr.RusTitle, pr.OriginalTitle
+					}
+					if episode.File.Serid == key {
+						return pr.RusTitle, pr.OriginalTitle
+					}
+				}
+			}
+		}
+	}
+	return "", ""
 }
