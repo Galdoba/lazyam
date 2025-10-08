@@ -334,6 +334,7 @@ func toLinuxPath(path string) string {
 
 func selectTemplate(t *task.Task) (string, []string) {
 	suffixes := t.Suffixes()
+	suffixes = excludeRepetitions(suffixes)
 	keep := []string{}
 	for _, suff := range suffixes {
 		if !strings.Contains(suff, "RUS") && t.IsSport {
@@ -358,6 +359,26 @@ func selectTemplate(t *task.Task) (string, []string) {
 	}
 	return "", []string{}
 
+}
+
+func excludeRepetitions(sl []string) []string {
+
+	for i, elem := range sl {
+		if detectedPresence(sl, elem) > 1 {
+			sl[i] = fmt.Sprintf("%v_%v", elem, i)
+		}
+	}
+	return sl
+}
+
+func detectedPresence(sl []string, s string) int {
+	counter := 0
+	for _, elem := range sl {
+		if elem == s {
+			counter++
+		}
+	}
+	return counter
 }
 
 func moveSources(cfg *config.Config, t *task.Task, sources ...string) error {
