@@ -12,6 +12,7 @@ import (
 	"github.com/Galdoba/lazyam/internal/appmodule/config"
 	"github.com/Galdoba/lazyam/internal/mediasource"
 	"github.com/Galdoba/lazyam/internal/projectdata"
+	"github.com/Galdoba/lazyam/pkg/notify"
 	"github.com/Galdoba/lazyam/pkg/translit"
 	"github.com/Galdoba/lazyam/pkg/ump"
 )
@@ -37,6 +38,7 @@ func (t *Task) FillMetatada(prj *projectdata.Projects, logger *logmanager.Logger
 		logger.Warnf("no keys found: %v", t.Directory)
 		return nil
 	}
+	ketSet := ""
 
 	project := projectdata.AmediaProject{}
 	fallbackMode := true
@@ -44,6 +46,8 @@ func (t *Task) FillMetatada(prj *projectdata.Projects, logger *logmanager.Logger
 		project, err = prj.SearchMasterFileByAmediaFileKey(key)
 		if err != nil {
 			logger.Warnf("key %v: not found in global data", key)
+			notify.SendErrorNoGlobalMetadataProvided(filepath.Base(t.Directory) + "_" + key)
+			ketSet = key
 		} else {
 			logger.Infof("key %v: found in global data", key)
 			t.AmediaFileKey = key
@@ -56,6 +60,8 @@ func (t *Task) FillMetatada(prj *projectdata.Projects, logger *logmanager.Logger
 		project, err = SearchLocalByAmediaFileKey(t.SignalFiles["metadata"], key)
 		if err != nil {
 			logger.Warnf("key %v: search failed: %v", key, err.Error())
+			// notify.SendErrorNoLocalMetadataProvided(filepath.Base(t.Directory) + "_" + key)
+			ketSet = key
 		} else {
 			logger.Infof("key %v: found in local data", key)
 			t.AmediaFileKey = key
@@ -75,6 +81,7 @@ func (t *Task) FillMetatada(prj *projectdata.Projects, logger *logmanager.Logger
 		logger.Warnf("fallback %v to %s transcoding method", "no metadata", t.Directory)
 		t.PRT = strings.TrimPrefix(getPRT(t.Directory), "_")
 		t.PRT = getPRT(t.Directory)
+		notify.SendErrorNoMetadata(filepath.Base(t.Directory) + "_" + ketSet)
 	case false:
 		if t.AmediaTitleOri == "" {
 			t.AmediaTitleOri = project.OriginalTitle
