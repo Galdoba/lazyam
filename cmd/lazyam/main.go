@@ -9,6 +9,7 @@ import (
 
 	"github.com/Galdoba/lazyam/internal/action"
 	"github.com/Galdoba/lazyam/internal/appmodule"
+	"github.com/Galdoba/lazyam/internal/appmodule/version"
 	"github.com/Galdoba/lazyam/internal/declare"
 	"github.com/Galdoba/lazyam/internal/flags"
 )
@@ -22,7 +23,7 @@ func main() {
 	}
 	cmd := cli.Command{
 		Name:        declare.APP_NAME,
-		Version:     "0.4.3",
+		Version:     version.Version(),
 		Description: "Automatic amedia content transcoding.",
 		Action:      action.Process(actx),
 

@@ -39,6 +39,8 @@ func defaultLiteralsMap() map[string]string {
 	defaultLiteralsMap["’"] = "_"
 	defaultLiteralsMap["„"] = "_"
 	defaultLiteralsMap["“"] = "_"
+	defaultLiteralsMap["|"] = "_"
+	defaultLiteralsMap["®"] = "_"
 
 	//Cyrillic
 	defaultLiteralsMap["а"] = "a"

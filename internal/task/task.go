@@ -12,6 +12,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Galdoba/lazyam/internal/appmodule/version"
 	"github.com/Galdoba/lazyam/internal/mediasource"
 	"github.com/Galdoba/lazyam/pkg/translit"
 )
@@ -76,6 +77,9 @@ func (t *Task) CollectSignals() error {
 	if err != nil {
 		return fmt.Errorf("failed to read project directory: %v", err)
 	}
+	if len(files) == 0 {
+		version.Version()
+	}
 	for _, file := range files {
 		if file.IsDir() {
 			continue
@@ -87,6 +91,7 @@ func (t *Task) CollectSignals() error {
 			t.SignalFiles["lock"] = joinPath(t.Directory, file.Name())
 
 		default:
+			version.Version()
 			continue
 		}
 	}
@@ -329,6 +334,7 @@ func constructInbase(t *Task) string {
 	}
 	tags = appendNonEmpty(tags, seasEpisInString(t.Season, t.Episode))
 	tags = appendNonEmpty(tags, t.PRT)
+	tags = appendNonEmpty(tags, version.Version())
 	return strings.Join(tags, "_")
 }
 

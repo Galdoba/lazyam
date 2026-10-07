@@ -1,0 +1,69 @@
+[2026-10-06 23:37:49.972] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Odel_kamara_vs_todoris_ricakis_PRT261006124928_0.4.4.sh
+[2026-10-06 23:58:52.713] [info]: new task added: Kill_Jackie_101_PRT261006133049
+[2026-10-06 23:58:52.713] [info]: new task added: Kill_Jackie_102_PRT261006132326
+[2026-10-06 23:58:52.733] [warning]: key EPS_18_0000008-rus_Russkii: not found in global data
+[2026-10-06 23:59:13.827] [info]: key EPS_18_0000008-rus_Russkii: found in local data
+panic: runtime error: index out of range [0] with length 0
+
+goroutine 1 [running]:
+main.main.Process.func1({0x8dffa7ea288?, 0x7ff6d049bf68?}, 0x8dffa7ea288)
+        C:/Users/pemaltynov/go/src/github.com/Galdoba/lazyam/internal/action/run.go:269 +0x282a
+github.com/urfave/cli/v3.(*Command).run(0x8dffa7ea288, {0x7ff6d049bf68, 0x8dffa759680}, {0x8dffa75e170, 0x1, 0x1})
+        c:/Users/pemaltynov/go/pkg/mod/github.com/urfave/cli/v3@v3.4.1/command_run.go:344 +0x2aa2
+github.com/urfave/cli/v3.(*Command).Run(...)
+        c:/Users/pemaltynov/go/pkg/mod/github.com/urfave/cli/v3@v3.4.1/command_run.go:94
+main.main()
+        C:/Users/pemaltynov/go/src/github.com/Galdoba/lazyam/cmd/lazyam/main.go:36 +0x27c
+
+C:\Users\pemaltynov>lazyam
+[2026-10-07 10:54:58.172] [notice]: session started
+[2026-10-07 10:54:58.216] [notice]: analitycs disabled
+[2026-10-07 10:54:58.296] [info]: update started: C:\Users\pemaltynov\.cache\lazyam\project_data.json
+[2026-10-07 10:54:59.704] [info]: updated: C:\Users\pemaltynov\.cache\lazyam\project_data.json from //192.168.31.4/buffer/IN/@AMEDIA_IN/metadata.json
+[2026-10-07 10:54:59.936] [info]: new task added: Ben_Whittaker_vs_Conor_Wallace_Ben_Uittaker_vs_Konor_Uolles_D_PRT261006124138
+[2026-10-07 10:54:59.936] [info]: new task added: Ibraheem_Sulaimaan_vs_Sonny_Hardy_Ibragim_Suleiman_vs_Sonni_Khardi_D_PRT261006125202
+[2026-10-07 10:54:59.936] [info]: new task added: Kill_Jackie_101_PRT261006133049
+[2026-10-07 10:54:59.937] [info]: new task added: Kill_Jackie_102_PRT261006132326
+[2026-10-07 10:54:59.937] [info]: new task added: Odel_Kamara_vs_Thodoris_Ritzakis_Odel_Kamara_vs_Todoris_Ritsakis_D_PRT261006124928
+[2026-10-07 10:54:59.937] [info]: new task added: TOUGEN_ANKI_Special_Recap_Nerima
+[2026-10-07 10:54:59.938] [info]: new task added: Tougen_Anki_201_PRT261006123615
+[2026-10-07 10:54:59.964] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Odel_Kamara_vs_Thodoris_Ritzakis_Odel_Kamara_vs_Todoris_Ritsakis_D_PRT261006124928
+[2026-10-07 10:54:59.980] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/TOUGEN_ANKI_Special_Recap_Nerima
+[2026-10-07 10:54:59.991] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Tougen_Anki_201_PRT261006123615
+[2026-10-07 10:55:00.000] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Ben_Whittaker_vs_Conor_Wallace_Ben_Uittaker_vs_Konor_Uolles_D_PRT261006124138
+[2026-10-07 10:55:00.009] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Ibraheem_Sulaimaan_vs_Sonny_Hardy_Ibragim_Suleiman_vs_Sonni_Khardi_D_PRT261006125202
+[2026-10-07 10:55:00.019] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Kill_Jackie_101_PRT261006133049
+[2026-10-07 10:55:00.029] [warning]: key EPS_18_0000009-rus_Russkii: not found in global data
+[2026-10-07 10:55:21.144] [info]: key EPS_18_0000009-rus_Russkii: found in local data
+panic: runtime error: index out of range [0] with length 0
+
+goroutine 1 [running]:
+main.main.Process.func1({0xf1f8c89a288?, 0x7ff6d049bf68?}, 0xf1f8c89a288)
+        C:/Users/pemaltynov/go/src/github.com/Galdoba/lazyam/internal/action/run.go:269 +0x282a
+github.com/urfave/cli/v3.(*Command).run(0xf1f8c89a288, {0x7ff6d049bf68, 0xf1f8c789680}, {0xf1f8c78e170, 0x1, 0x1})
+        c:/Users/pemaltynov/go/pkg/mod/github.com/urfave/cli/v3@v3.4.1/command_run.go:344 +0x2aa2
+github.com/urfave/cli/v3.(*Command).Run(...)
+        c:/Users/pemaltynov/go/pkg/mod/github.com/urfave/cli/v3@v3.4.1/command_run.go:94
+main.main()
+        C:/Users/pemaltynov/go/src/github.com/Galdoba/lazyam/cmd/lazyam/main.go:36 +0x27c
+
+C:\Users\pemaltynov>lazyam
+[2026-10-07 10:55:46.425] [notice]: session started
+[2026-10-07 10:55:46.469] [notice]: analitycs disabled
+[2026-10-07 10:55:46.481] [info]: update started: C:\Users\pemaltynov\.cache\lazyam\project_data.json
+[2026-10-07 10:55:47.800] [info]: updated: C:\Users\pemaltynov\.cache\lazyam\project_data.json from //192.168.31.4/buffer/IN/@AMEDIA_IN/metadata.json
+[2026-10-07 10:55:48.032] [info]: new task added: Ben_Whittaker_vs_Conor_Wallace_Ben_Uittaker_vs_Konor_Uolles_D_PRT261006124138
+[2026-10-07 10:55:48.033] [info]: new task added: Ibraheem_Sulaimaan_vs_Sonny_Hardy_Ibragim_Suleiman_vs_Sonni_Khardi_D_PRT261006125202
+[2026-10-07 10:55:48.033] [info]: new task added: Kill_Jackie_101_PRT261006133049
+[2026-10-07 10:55:48.034] [info]: new task added: Kill_Jackie_102_PRT261006132326
+[2026-10-07 10:55:48.034] [info]: new task added: Odel_Kamara_vs_Thodoris_Ritzakis_Odel_Kamara_vs_Todoris_Ritsakis_D_PRT261006124928
+[2026-10-07 10:55:48.034] [info]: new task added: TOUGEN_ANKI_Special_Recap_Nerima
+[2026-10-07 10:55:48.034] [info]: new task added: Tougen_Anki_201_PRT261006123615
+[2026-10-07 10:55:48.042] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Ibraheem_Sulaimaan_vs_Sonny_Hardy_Ibragim_Suleiman_vs_Sonni_Khardi_D_PRT261006125202
+[2026-10-07 10:55:48.051] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Kill_Jackie_101_PRT261006133049
+[2026-10-07 10:55:48.060] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Kill_Jackie_102_PRT261006132326
+[2026-10-07 10:55:48.069] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Odel_Kamara_vs_Thodoris_Ritzakis_Odel_Kamara_vs_Todoris_Ritsakis_D_PRT261006124928
+[2026-10-07 10:55:48.077] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/TOUGEN_ANKI_Special_Recap_Nerima
+[2026-10-07 10:55:48.085] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Tougen_Anki_201_PRT261006123615
+[2026-10-07 10:55:48.094] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Ben_Whittaker_vs_Conor_Wallace_Ben_Uittaker_vs_Konor_Uolles_D_PRT261006124138
+dormant mode for 00:00:59

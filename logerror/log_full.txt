@@ -1,0 +1,553 @@
+[2026-09-17 10:00:11.272] [info]: key SER_09186_18: found in global data
+[2026-09-17 10:00:11.530] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Chislo_zverya_s01e07_PRT260917000000_0.4.4.sh
+[2026-09-17 10:00:11.581] [info]: key SER_09184_18: found in global data
+[2026-09-17 10:00:11.801] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Chislo_zverya_s01e05_PRT260917002939_0.4.4.sh
+[2026-09-17 10:00:11.916] [info]: key SER_09188_18: found in global data
+[2026-09-17 10:00:12.094] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Chislo_zverya_s01e09_PRT260917003400_0.4.4.sh
+[2026-09-17 10:00:12.101] [info]: key SER_09191_18: found in global data
+[2026-09-17 10:00:12.475] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Chislo_zverya_s01e12_PRT260917002128_0.4.4.sh
+[2026-09-17 10:00:12.521] [info]: key SER_09190_18: found in global data
+[2026-09-17 10:00:12.699] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Chislo_zverya_s01e11_PRT260917004202_0.4.4.sh
+[2026-09-17 10:00:12.742] [info]: key SER_09185_18: found in global data
+[2026-09-17 10:00:12.990] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Chislo_zverya_s01e06_PRT260917000424_0.4.4.sh
+[2026-09-17 10:00:13.134] [info]: key SER_09180_18: found in global data
+[2026-09-17 10:00:13.364] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Chislo_zverya_s01e01_PRT260917002540_0.4.4.sh
+[2026-09-17 10:00:13.387] [info]: key SER_09189_18: found in global data
+[2026-09-17 10:00:13.561] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Chislo_zverya_s01e10_PRT260917001709_0.4.4.sh
+[2026-09-17 10:00:13.617] [info]: key SER_09187_18: found in global data
+[2026-09-17 10:00:13.851] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Chislo_zverya_s01e08_PRT260917000833_0.4.4.sh
+[2026-09-17 10:00:13.890] [info]: key SER_09181_18: found in global data
+[2026-09-17 10:00:14.157] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Chislo_zverya_s01e02_PRT260917004620_0.4.4.sh
+[2026-09-17 10:00:14.165] [info]: key SER_09182_18: found in global data
+[2026-09-17 10:00:14.394] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Chislo_zverya_s01e03_PRT260917003806_0.4.4.sh
+[2026-09-17 10:00:14.431] [info]: key SER_09183_18: found in global data
+[2026-09-17 10:00:14.657] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Chislo_zverya_s01e04_PRT260917001258_0.4.4.sh
+[2026-09-18 20:36:53.206] [info]: update started: C:\Users\pemaltynov\.cache\lazyam\project_data.json
+[2026-09-18 20:36:53.956] [info]: Адский уровень: Хардкорный геймер на самой высокой сложности в другом мире [SHMHG0000]: metadata updated
+[2026-09-18 20:36:54.256] [info]: Число зверя [SCLCZ0000]: metadata updated
+[2026-09-18 20:36:54.610] [info]: updated: C:\Users\pemaltynov\.cache\lazyam\project_data.json from //192.168.31.4/buffer/IN/@AMEDIA_IN/metadata.json
+[2026-09-18 20:36:55.004] [info]: new task added: Star_Trek_Strange_New_Worlds_409_PRT260918130427
+[2026-09-18 20:36:55.137] [info]: key SER_08841_16: found in global data
+[2026-09-18 20:36:55.447] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Zvezdnyy_put_strannye_novye_miry_s04e09_PRT260918130427_0.4.4.sh
+[2026-09-18 23:01:48.595] [info]: new task added: George_Carlin_s_American_Dream_101_PRT260918152225
+[2026-09-18 23:01:48.595] [info]: new task added: George_Carlin_s_American_Dream_102_PRT260918140127
+[2026-09-18 23:01:49.013] [info]: key SER_03054_18: found in global data
+[2026-09-18 23:01:49.560] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Amerikanskaya_mechta_dzhordzha_karlina_s01e02_PRT260918140127_0.4.4.sh
+[2026-09-18 23:01:49.614] [info]: key SER_03053_18: found in global data
+[2026-09-18 23:01:50.162] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Amerikanskaya_mechta_dzhordzha_karlina_s01e01_PRT260918152225_0.4.4.sh
+[2026-09-19 11:00:18.752] [info]: new task added: Hell_Mode_The_Hardcore_Gamer_Dominates_in_Another_World_with_Garbage_Balancing_212_PRT260918193000
+[2026-09-19 11:00:19.135] [info]: key SER_09193_18: found in global data
+[2026-09-19 11:00:19.299] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Adskiy_uroven_hardkornyy_geymer_na_samoy_vysokoy_slozhnosti_v_drugom_mire_s02e12_PRT260918193000_0.4.4.sh
+[2026-09-20 19:48:39.733] [info]: new task added: The_Rehearsal_101_PRT260919123247
+[2026-09-20 19:48:39.733] [info]: new task added: The_Rehearsal_102_PRT260919123802
+[2026-09-20 19:48:39.733] [info]: new task added: The_Rehearsal_103_PRT260919122729
+[2026-09-20 19:48:39.733] [info]: new task added: The_Rehearsal_104_PRT260919124113
+[2026-09-20 19:48:39.733] [info]: new task added: The_Rehearsal_105_PRT260919131837
+[2026-09-20 19:48:39.733] [info]: new task added: The_Rehearsal_106_PRT260919131352
+[2026-09-20 19:48:40.037] [info]: key SER_02589_18: found in global data
+[2026-09-20 19:48:42.949] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Repeticiya_s01e02_PRT260919123802_0.4.4.sh
+[2026-09-20 19:48:42.959] [info]: key SER_02590_18: found in global data
+[2026-09-20 19:48:43.143] [info]: key SER_02588_18: found in global data
+[2026-09-20 19:48:43.467] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Repeticiya_s01e01_PRT260919123247_0.4.4.sh
+[2026-09-20 19:48:43.537] [info]: key SER_02591_18: found in global data
+[2026-09-20 19:48:43.652] [info]: key SER_02592_18: found in global data
+[2026-09-20 19:48:43.921] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Repeticiya_s01e05_PRT260919131837_0.4.4.sh
+[2026-09-20 19:48:44.061] [info]: key SER_02593_18: found in global data
+[2026-09-21 10:09:20.030] [info]: new task added: Goodbye_Lara_112_PRT260920193000
+[2026-09-21 10:09:20.031] [info]: new task added: Though_I_Am_an_Inept_Villainess_111_PRT260920190000
+[2026-09-21 10:09:20.204] [warning]: key SER_09194_18: not found in global data
+[2026-09-21 10:09:42.072] [info]: key SER_09194_18: found in local data
+[2026-09-21 10:09:42.326] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Hot_ya_i_bezdarnaya_zlodeyka_s01e11_PRT260920190000_0.4.4.sh
+[2026-09-21 10:09:42.783] [warning]: key SER_09195_18: not found in global data
+[2026-09-21 10:10:03.876] [info]: key SER_09195_18: found in local data
+[2026-09-21 10:10:04.019] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Proshay_lara_s01e12_PRT260920193000_0.4.4.sh
+[2026-09-21 20:29:18.824] [info]: new task added: The_Rehearsal_103_PRT260921130613
+[2026-09-21 20:29:18.824] [info]: new task added: The_Rehearsal_104_PRT260921130030
+[2026-09-21 20:29:19.560] [info]: key SER_02590_18: found in global data
+[2026-09-21 20:29:19.860] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Repeticiya_s01e03_PRT260921130613_0.4.4.sh
+[2026-09-21 20:29:19.868] [info]: key SER_02591_18: found in global data
+[2026-09-21 20:29:20.118] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Repeticiya_s01e04_PRT260921130030_0.4.4.sh
+[2026-09-21 22:48:15.117] [info]: new task added: The_Rehearsal_106_PRT260921145802
+[2026-09-21 22:48:15.539] [info]: key SER_02593_18: found in global data
+[2026-09-21 22:48:15.840] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Repeticiya_s01e06_PRT260921145802_0.4.4.sh
+[2026-09-22 10:25:55.381] [info]: new task added: Liar_Game_125_PRT260921200000
+[2026-09-22 10:25:55.382] [info]: new task added: The_Rehearsal_105_PRT260921202049
+[2026-09-22 10:25:55.794] [info]: key SER_02592_18: found in global data
+[2026-09-22 10:25:57.846] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Repeticiya_s01e05_PRT260921202049_0.4.4.sh
+[2026-09-22 10:25:57.937] [warning]: key SER_09196_18: not found in global data
+[2026-09-22 10:26:19.799] [info]: key SER_09196_18: found in local data
+[2026-09-22 10:26:20.057] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Igra_lzhecov_s01e25_PRT260921200000_0.4.4.sh
+[2026-09-23 23:14:26.900] [info]: new task added: Clevatess_212_PRT260923160000
+[2026-09-23 23:14:27.439] [warning]: key SER_09197_18: not found in global data
+[2026-09-23 23:14:49.267] [info]: key SER_09197_18: found in local data
+[2026-09-23 23:14:49.444] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Klevatess_s02e12_PRT260923160000_0.4.4.sh
+[2026-09-24 19:32:14.253] [info]: trailer script for Chislo_zverya_Treyler_A-teka.mp4 complete
+[2026-09-24 21:27:01.118] [info]: new task added: Showbiz_kids_PRT260924130916
+[2026-09-24 21:27:01.245] [info]: key MOV_00024_18: found in global data
+[2026-09-24 21:27:04.732] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Deti_shou_biznesa_PRT260924130916_0.4.4.sh
+[2026-09-25 19:18:15.342] [info]: new task added: Star_Trek_Strange_New_Worlds_410_PRT260925120000
+[2026-09-25 19:18:15.789] [warning]: key SER_09199_18: not found in global data
+[2026-09-25 19:18:37.628] [info]: key SER_09199_18: found in local data
+[2026-09-25 19:18:43.866] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Zvezdnyy_put_strannye_novye_miry_s04e10_PRT260925120000_0.4.4.sh
+[2026-09-25 19:27:29.343] [warning]: failed to check lock: %!v(MISSING)
+[2026-09-25 22:14:15.141] [notice]: session started
+[2026-09-25 22:14:15.142] [notice]: analitycs disabled
+[2026-09-25 22:14:15.165] [info]: update started: C:\Users\pemaltynov\.cache\lazyam\project_data.json
+[2026-09-25 22:14:17.241] [info]: updated: C:\Users\pemaltynov\.cache\lazyam\project_data.json from //192.168.31.4/buffer/IN/@AMEDIA_IN/metadata.json
+[2026-09-25 22:14:17.478] [info]: new task added: Clevatess_212_PRT260923160000
+[2026-09-25 22:14:17.478] [info]: new task added: Liar_Game_125_PRT260921200000
+[2026-09-25 22:14:17.479] [info]: new task added: Showbiz_kids_PRT260924130916
+[2026-09-25 22:14:17.479] [info]: new task added: Star_Trek_Strange_New_Worlds_410_PRT260925120000
+[2026-09-25 22:14:17.479] [info]: new task added: The_Rehearsal_105_PRT260921202049
+[2026-09-25 22:14:17.496] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Clevatess_212_PRT260923160000
+[2026-09-25 22:14:17.513] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Liar_Game_125_PRT260921200000
+[2026-09-25 22:14:17.521] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Showbiz_kids_PRT260924130916
+[2026-09-25 22:14:17.529] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Star_Trek_Strange_New_Worlds_410_PRT260925120000
+[2026-09-25 22:14:17.536] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/The_Rehearsal_105_PRT260921202049
+[2026-09-25 22:16:40.245] [notice]: session started
+[2026-09-25 22:16:40.246] [notice]: analitycs disabled
+[2026-09-25 22:16:40.259] [info]: update started: C:\Users\pemaltynov\.cache\lazyam\project_data.json
+[2026-09-25 22:16:41.573] [info]: updated: C:\Users\pemaltynov\.cache\lazyam\project_data.json from //192.168.31.4/buffer/IN/@AMEDIA_IN/metadata.json
+[2026-09-25 22:16:41.809] [info]: new task added: Clevatess_212_PRT260923160000
+[2026-09-25 22:16:41.810] [info]: new task added: Liar_Game_125_PRT260921200000
+[2026-09-25 22:16:41.810] [info]: new task added: Showbiz_kids_PRT260924130916
+[2026-09-25 22:16:41.810] [info]: new task added: Star_Trek_Strange_New_Worlds_410_PRT260925120000
+[2026-09-25 22:16:41.811] [info]: new task added: The_Rehearsal_105_PRT260921202049
+[2026-09-25 22:16:41.820] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Clevatess_212_PRT260923160000
+[2026-09-25 22:16:41.829] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Liar_Game_125_PRT260921200000
+[2026-09-25 22:16:41.838] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Showbiz_kids_PRT260924130916
+[2026-09-25 22:16:41.846] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Star_Trek_Strange_New_Worlds_410_PRT260925120000
+[2026-09-25 22:16:41.853] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/The_Rehearsal_105_PRT260921202049
+[2026-09-25 22:20:35.431] [notice]: session started
+[2026-09-25 22:20:35.433] [notice]: analitycs disabled
+[2026-09-25 22:20:35.458] [info]: update started: C:\Users\pemaltynov\.cache\lazyam\project_data.json
+[2026-09-25 22:20:36.792] [info]: updated: C:\Users\pemaltynov\.cache\lazyam\project_data.json from //192.168.31.4/buffer/IN/@AMEDIA_IN/metadata.json
+[2026-09-25 22:20:37.032] [info]: new task added: Clevatess_212_PRT260923160000
+[2026-09-25 22:20:37.032] [info]: new task added: Liar_Game_125_PRT260921200000
+[2026-09-25 22:20:37.032] [info]: new task added: Showbiz_kids_PRT260924130916
+[2026-09-25 22:20:37.033] [info]: new task added: Star_Trek_Strange_New_Worlds_410_PRT260925120000
+[2026-09-25 22:20:37.033] [info]: new task added: The_Rehearsal_105_PRT260921202049
+[2026-09-25 22:20:37.041] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Clevatess_212_PRT260923160000
+[2026-09-25 22:20:37.050] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Liar_Game_125_PRT260921200000
+[2026-09-25 22:20:37.058] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Showbiz_kids_PRT260924130916
+[2026-09-25 22:20:37.068] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Star_Trek_Strange_New_Worlds_410_PRT260925120000
+[2026-09-25 22:20:37.076] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/The_Rehearsal_105_PRT260921202049
+[2026-09-25 22:36:48.059] [notice]: session started
+[2026-09-25 22:36:48.060] [notice]: analitycs disabled
+[2026-09-25 22:36:48.072] [info]: update started: C:\Users\pemaltynov\.cache\lazyam\project_data.json
+[2026-09-25 22:36:49.395] [info]: updated: C:\Users\pemaltynov\.cache\lazyam\project_data.json from //192.168.31.4/buffer/IN/@AMEDIA_IN/metadata.json
+[2026-09-25 22:36:49.631] [info]: new task added: Clevatess_212_PRT260923160000
+[2026-09-25 22:36:49.631] [info]: new task added: Liar_Game_125_PRT260921200000
+[2026-09-25 22:36:49.631] [info]: new task added: Showbiz_kids_PRT260924130916
+[2026-09-25 22:36:49.631] [info]: new task added: Star_Trek_Strange_New_Worlds_410_PRT260925120000
+[2026-09-25 22:36:49.631] [info]: new task added: The_Rehearsal_105_PRT260921202049
+[2026-09-25 22:36:49.642] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Showbiz_kids_PRT260924130916
+[2026-09-25 22:36:49.651] [warning]: key SER_09199_18: not found in global data
+[2026-09-25 22:37:11.607] [info]: key SER_09199_18: found in local data
+[2026-09-25 22:37:14.879] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Zvezdnyy_put_strannye_novye_miry_s04e10_PRT260925120000_0.4.4.sh
+[2026-09-25 22:37:14.884] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/The_Rehearsal_105_PRT260921202049
+[2026-09-25 22:37:14.891] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Clevatess_212_PRT260923160000
+[2026-09-25 22:37:14.898] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Liar_Game_125_PRT260921200000
+[2026-09-25 22:38:39.270] [info]: update started: C:\Users\pemaltynov\.cache\lazyam\project_data.json
+[2026-09-25 22:38:40.037] [info]: Клеватесс [SCTVE0000]: metadata updated
+[2026-09-25 22:38:40.068] [info]: Дом с прислугой [SSARE0000]: metadata updated
+[2026-09-25 22:38:40.109] [info]: Американская мечта Джорджа Карлина [SGCAD0000]: metadata updated
+[2026-09-25 22:38:40.130] [info]: Лето 1990 [STATI0000]: metadata updated
+[2026-09-25 22:38:40.160] [info]: Убить Джеки [SKJCL0000]: metadata updated
+[2026-09-25 22:38:40.181] [info]: Прощай, Лара [SGLYL0000]: metadata updated
+[2026-09-25 22:38:40.181] [info]: Адский уровень: Хардкорный геймер на самой высокой сложности в другом мире [SHMHG0000]: metadata updated
+[2026-09-25 22:38:40.239] [info]: Игра лжецов [SLGAM0000]: metadata updated
+[2026-09-25 22:38:40.273] [info]: Выгодная афера [SDDUH0000]: metadata updated
+[2026-09-25 22:38:40.355] [info]: Репетиция [SRLRE0000]: metadata updated
+[2026-09-25 22:38:40.443] [info]: Звездный путь: Странные новые миры [SSTSN0000]: metadata updated
+[2026-09-25 22:38:40.572] [info]: Хоть я и бездарная злодейка [STIAI0000]: metadata updated
+[2026-09-25 22:38:40.685] [info]: updated: C:\Users\pemaltynov\.cache\lazyam\project_data.json from //192.168.31.4/buffer/IN/@AMEDIA_IN/metadata.json
+[2026-09-26 11:58:16.493] [info]: new task added: Hell_Mode_The_Hardcore_Gamer_Dominates_in_Another_World_with_Garbage_Balancing_213_PRT260925193000
+[2026-09-26 11:58:16.494] [info]: new task added: Showbiz_kids_PRT260925180444
+[2026-09-26 11:58:16.502] [info]: key SER_09200_18: found in global data
+[2026-09-26 11:58:16.714] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Adskiy_uroven_hardkornyy_geymer_na_samoy_vysokoy_slozhnosti_v_drugom_mire_s02e13_PRT260925193000_0.4.4.sh
+[2026-09-26 11:58:16.721] [info]: key MOV_00024_18: found in global data
+[2026-09-26 11:58:17.210] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Deti_shou_biznesa_PRT260925180444_0.4.4.sh
+[2026-09-27 13:34:21.424] [info]: new task added: Bradley_Goldsmith_vs_Amir_Abubaker_Bredli_Goldsmit_vs_Amir_Abubaker_D_PRT260927010934
+[2026-09-27 13:34:21.459] [warning]: key SPO_40727: not found in global data
+[2026-09-27 13:34:43.117] [info]: key SPO_40727: found in local data
+[2026-09-27 13:34:45.595] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Bredli_goldsmit_vs_amir_abubaker_PRT260927010934_0.4.4.sh
+[2026-09-27 13:35:51.830] [info]: new task added: Lewis_Richardson_vs_Ivan_Trofimovich_Liuis_Richardson_vs_Ivan_Trofimovich_D_PRT260927010313
+[2026-09-27 13:35:51.831] [info]: new task added: Liam_Davies_vs_Nathaniel_Collins_Liam_Devis_vs_Nataniel_Kollins_D_PRT260927013253
+[2026-09-27 13:35:51.844] [warning]: key SPO_40730: not found in global data
+[2026-09-27 13:36:12.955] [info]: key SPO_40730: found in local data
+[2026-09-27 13:36:13.184] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Liam_devis_vs_nataniel_kollins_PRT260927013253_0.4.4.sh
+[2026-09-27 13:36:13.198] [warning]: key SPO_40729: not found in global data
+[2026-09-27 13:36:34.285] [info]: key SPO_40729: found in local data
+[2026-09-27 13:36:34.475] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Lyuis_richardson_vs_ivan_trofimovich_PRT260927010313_0.4.4.sh
+[2026-09-27 14:27:40.649] [info]: new task added: Luke_McCormack_vs_Kay_Prospere_Liuk_Makkormak_vs_Kei_Prosper_D_PRT260927065551
+[2026-09-27 14:27:40.679] [warning]: key SPO_40728: not found in global data
+[2026-09-27 14:28:01.784] [info]: key SPO_40728: found in local data
+[2026-09-27 14:28:02.068] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Lyuk_makkormak_vs_key_prosper_PRT260927065551_0.4.4.sh
+[2026-09-28 10:21:27.983] [info]: new task added: Bradley_Goldsmith_vs_Amir_Abubaker_Bredli_Goldsmit_vs_Amir_Abubaker_D_PRT260927175746
+[2026-09-28 10:21:27.984] [info]: new task added: Liam_Davies_vs_Nathaniel_Collins_Liam_Devis_vs_Nataniel_Kollins_D_PRT260927174432
+[2026-09-28 10:21:28.040] [warning]: key SPO_40727: not found in global data
+[2026-09-28 10:21:49.125] [info]: key SPO_40727: found in local data
+[2026-09-28 10:21:49.530] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Bredli_goldsmit_vs_amir_abubaker_PRT260927175746_0.4.4.sh
+[2026-09-28 10:21:49.537] [warning]: key SPO_40730: not found in global data
+[2026-09-28 10:22:10.658] [info]: key SPO_40730: found in local data
+[2026-09-28 10:22:11.415] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Liam_devis_vs_nataniel_kollins_PRT260927174432_0.4.4.sh
+[2026-09-28 11:44:53.561] [notice]: session started
+[2026-09-28 11:44:53.562] [notice]: analitycs disabled
+[2026-09-28 11:44:53.575] [info]: update started: C:\Users\pemaltynov\.cache\lazyam\project_data.json
+[2026-09-28 11:44:54.988] [info]: updated: C:\Users\pemaltynov\.cache\lazyam\project_data.json from //192.168.31.4/buffer/IN/@AMEDIA_IN/metadata.json
+[2026-09-28 11:44:55.225] [info]: new task added: Bradley_Goldsmith_vs_Amir_Abubaker_Bredli_Goldsmit_vs_Amir_Abubaker_D_PRT260927010934
+[2026-09-28 11:44:55.225] [info]: new task added: Bradley_Goldsmith_vs_Amir_Abubaker_Bredli_Goldsmit_vs_Amir_Abubaker_D_PRT260927175746
+[2026-09-28 11:44:55.226] [info]: new task added: Clevatess_212_PRT260923160000
+[2026-09-28 11:44:55.226] [info]: new task added: Hell_Mode_The_Hardcore_Gamer_Dominates_in_Another_World_with_Garbage_Balancing_213_PRT260925193000
+[2026-09-28 11:44:55.226] [info]: new task added: Lewis_Richardson_vs_Ivan_Trofimovich_Liuis_Richardson_vs_Ivan_Trofimovich_D_PRT260927010313
+[2026-09-28 11:44:55.226] [info]: new task added: Liam_Davies_vs_Nathaniel_Collins_Liam_Devis_vs_Nataniel_Kollins_D_PRT260927013253
+[2026-09-28 11:44:55.227] [info]: new task added: Liam_Davies_vs_Nathaniel_Collins_Liam_Devis_vs_Nataniel_Kollins_D_PRT260927174432
+[2026-09-28 11:44:55.227] [info]: new task added: Liar_Game_125_PRT260921200000
+[2026-09-28 11:44:55.227] [info]: new task added: Luke_McCormack_vs_Kay_Prospere_Liuk_Makkormak_vs_Kei_Prosper_D_PRT260927065551
+[2026-09-28 11:44:55.227] [info]: new task added: Showbiz_kids_PRT260924130916
+[2026-09-28 11:44:55.228] [info]: new task added: Showbiz_kids_PRT260925180444
+[2026-09-28 11:44:55.228] [info]: new task added: Star_Trek_Strange_New_Worlds_410_PRT260925120000
+[2026-09-28 11:44:55.228] [info]: new task added: The_Rehearsal_105_PRT260921202049
+[2026-09-28 11:44:55.253] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Star_Trek_Strange_New_Worlds_410_PRT260925120000
+[2026-09-28 11:44:55.269] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/The_Rehearsal_105_PRT260921202049
+[2026-09-28 11:44:55.278] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Bradley_Goldsmith_vs_Amir_Abubaker_Bredli_Goldsmit_vs_Amir_Abubaker_D_PRT260927010934
+[2026-09-28 11:44:55.303] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Bradley_Goldsmith_vs_Amir_Abubaker_Bredli_Goldsmit_vs_Amir_Abubaker_D_PRT260927175746
+[2026-09-28 11:44:55.319] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Liam_Davies_vs_Nathaniel_Collins_Liam_Devis_vs_Nataniel_Kollins_D_PRT260927013253
+[2026-09-28 11:44:55.328] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Liar_Game_125_PRT260921200000
+[2026-09-28 11:44:55.335] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Luke_McCormack_vs_Kay_Prospere_Liuk_Makkormak_vs_Kei_Prosper_D_PRT260927065551
+[2026-09-28 11:44:55.344] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Clevatess_212_PRT260923160000
+[2026-09-28 11:44:55.351] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Hell_Mode_The_Hardcore_Gamer_Dominates_in_Another_World_with_Garbage_Balancing_213_PRT260925193000
+[2026-09-28 11:44:55.360] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Lewis_Richardson_vs_Ivan_Trofimovich_Liuis_Richardson_vs_Ivan_Trofimovich_D_PRT260927010313
+[2026-09-28 11:44:55.368] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Liam_Davies_vs_Nathaniel_Collins_Liam_Devis_vs_Nataniel_Kollins_D_PRT260927174432
+[2026-09-28 11:44:55.376] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Showbiz_kids_PRT260924130916
+[2026-09-28 11:44:55.383] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Showbiz_kids_PRT260925180444
+[2026-09-28 20:46:14.849] [info]: trailer script for Ubit_Dzheki_Treyler_A-teka.mp4 complete
+[2026-09-29 09:11:56.923] [info]: new task added: Liar_Game_126_PRT260928200000
+[2026-09-29 09:11:56.974] [info]: key SER_09201_18: found in global data
+[2026-09-29 09:12:02.899] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Igra_lzhecov_s01e26_PRT260928200000_0.4.4.sh
+[2026-09-30 23:17:29.700] [info]: update started: C:\Users\pemaltynov\.cache\lazyam\project_data.json
+[2026-09-30 23:17:30.450] [info]: Кэти Тейлор vs Аманда Серрано [FKTAS0000]: metadata updated
+[2026-09-30 23:17:30.457] [info]: Мишель Вулф: Милая дама [FMIWO0000]: metadata updated
+[2026-09-30 23:17:30.458] [info]: Падение криптокороля [FDCKG0000]: metadata updated
+[2026-09-30 23:17:30.461] [info]: Джозеф Диас vs Уильям Сепеда [FJDWZ0000]: metadata updated
+[2026-09-30 23:17:30.466] [info]: Наследники [SSUCC0000]: metadata updated
+[2026-09-30 23:17:30.475] [info]: Далтон Смит vs Валид Уизза [FDSWO0000]: metadata updated
+[2026-09-30 23:17:30.476] [info]: Массовое похищение в Чибоке [FSTLC0000]: metadata updated
+[2026-09-30 23:17:30.480] [info]: Паша [SPSAS0000]: metadata updated
+[2026-09-30 23:17:30.482] [info]: Заговор [FCNSP0000]: metadata updated
+[2026-09-30 23:17:30.487] [info]: Джордж Камбосос-мл. vs Джейк Уилли [FGKJJ0000]: metadata updated
+[2026-09-30 23:17:30.491] [info]: Зло [SEVIL0000]: metadata updated
+[2026-09-30 23:17:30.494] [info]: Вердикт за деньги [FRJNU0000]: metadata updated
+[2026-09-30 23:17:30.500] [info]: Роман Гонсалес vs Хулио Сезар Мартинес [FRGJC0000]: metadata updated
+[2026-09-30 23:17:30.503] [info]: Шакил Томпсон vs Давид Бенитес [FSTDB0000]: metadata updated
+[2026-09-30 23:17:30.509] [info]: Хуан Франсиско Эстрада vs Роман Гонсалес III [FJFER0000]: metadata updated
+[2026-09-30 23:17:30.510] [info]: Змея из Алабамы [FALAB0000]: metadata updated
+[2026-09-30 23:17:30.511] [info]: Нора Эфрон. Жизнь как материал [FNESU0000]: metadata updated
+[2026-09-30 23:17:30.514] [info]: З/Л/О/94 [FVHSH0000]: metadata updated
+[2026-09-30 23:17:30.516] [info]: Джейн Остин: Восхождение гения [SJARG0000]: metadata updated
+[2026-09-30 23:17:30.519] [info]: Мармадюк [FMERA0000]: metadata updated
+[2026-09-30 23:17:30.519] [info]: З/Л/О/85 [FVHSS0000]: metadata updated
+[2026-09-30 23:17:30.524] [info]: Энтони Какаче vs Ли Вуд [FACLW0000]: metadata updated
+[2026-09-30 23:17:30.524] [info]: Артур Миллер: Писатель [FARMW0000]: metadata updated
+[2026-09-30 23:17:30.540] [info]: Джесси Родригес vs Санни Эдвардс [FJRSE0000]: metadata updated
+[2026-09-30 23:17:30.549] [info]: Миротворец [SPEAC0000]: metadata updated
+[2026-09-30 23:17:30.549] [info]: Лиам Дэвис vs Натаниэль Коллинс [FLDNC0000]: metadata updated
+[2026-09-30 23:17:30.550] [info]: Гранит науки [FROSC0000]: metadata updated
+[2026-09-30 23:17:30.553] [info]: Райан Гарсия vs Оскар Дуарте [FRGOD0000]: metadata updated
+[2026-09-30 23:17:30.554] [info]: Вечность Югурэ [SDBEW0000]: metadata updated
+[2026-09-30 23:17:30.556] [info]: Служба новостей [SNEWS0000]: metadata updated
+[2026-09-30 23:17:30.566] [info]: Американская мечта Джорджа Карлина [SGCAD0000]: metadata updated
+[2026-09-30 23:17:30.569] [info]: Элвин и бурундуки 2 [FAACS0000]: metadata updated
+[2026-09-30 23:17:30.570] [info]: Эллен Дедженерес. Здесь и сейчас [FELDE0000]: metadata updated
+[2026-09-30 23:17:30.572] [info]: Билл Маар... Но я прав [FBMNW0000]: metadata updated
+[2026-09-30 23:17:30.588] [info]: Схема [FSCHE0000]: metadata updated
+[2026-09-30 23:17:30.604] [info]: О'Шаки Фостер vs Рокки Эрнандес [FOSFR0000]: metadata updated
+[2026-09-30 23:17:30.613] [info]: Вице-президент [SVEEP0000]: metadata updated
+[2026-09-30 23:17:30.615] [info]: Дэниел Джейкобс vs Джон Райдер [FDJJR0000]: metadata updated
+[2026-09-30 23:17:30.622] [info]: Фрэнсис Нганну: Выкованный трудностями [FFNFA0000]: metadata updated
+[2026-09-30 23:17:30.628] [info]: Кэти Тейлор vs Карен Элизабет Карабахаль [FKTKE0000]: metadata updated
+[2026-09-30 23:17:30.631] [info]: Платформа 7 [SPTLA0000]: metadata updated
+[2026-09-30 23:17:30.637] [info]: Крис Гезерд: Карьера самоубийцы [FCGCS0000]: metadata updated
+[2026-09-30 23:17:30.639] [info]: Настоящая кровь [STRUE0000]: metadata updated
+[2026-09-30 23:17:30.642] [info]: Уитни Каммингс. Здравствуйте, я ваша девушка [FWICU0000]: metadata updated
+[2026-09-30 23:17:30.649] [info]: Немного за 30 [SBMDO0000]: metadata updated
+[2026-09-30 23:17:30.651] [info]: Тотем [FTOTM0000]: metadata updated
+[2026-09-30 23:17:30.652] [info]: Разум женатого мужчины [SMOMM0000]: metadata updated
+[2026-09-30 23:17:30.653] [info]: Развод [SDIVO0000]: metadata updated
+[2026-09-30 23:17:30.657] [info]: Никсон о Никсоне [FNXNX0000]: metadata updated
+[2026-09-30 23:17:30.659] [info]: Джо Джойс vs Филип Хргович [FJJFH0000]: metadata updated
+[2026-09-30 23:17:30.663] [info]: Вермейл в золотом [SVGML0000]: metadata updated
+[2026-09-30 23:17:30.666] [info]: Этель Кеннеди [FETHE0000]: metadata updated
+[2026-09-30 23:17:30.668] [info]: Сан-Франциско 2.0 [FSAFR0000]: metadata updated
+[2026-09-30 23:17:30.669] [info]: Столетие американского кино [FCEAM0000]: metadata updated
+[2026-09-30 23:17:30.678] [info]: Истерическая слепота [FHYST0000]: metadata updated
+[2026-09-30 23:17:30.681] [info]: Проект «Токио» [FTTPR0000]: metadata updated
+[2026-09-30 23:17:30.681] [info]: Кларисса Шилдс vs Даниэль Перкинс [FCSDP0000]: metadata updated
+[2026-09-30 23:17:30.686] [info]: Шак [SSFKA0000]: metadata updated
+[2026-09-30 23:17:30.689] [info]: Расследования Мёрдока [SMMEU0000]: metadata updated
+[2026-09-30 23:17:30.691] [info]: Наму [FNOAO0000]: metadata updated
+[2026-09-30 23:17:30.693] [info]: Глава Синалоа [FCEOS0000]: metadata updated
+[2026-09-30 23:17:30.695] [info]: Субриэль Матиас vs Габриэль Валенсуэла [FSMGV0000]: metadata updated
+[2026-09-30 23:17:30.696] [info]: Санни Эдвардс vs Андрес Кампос [FSEAC0000]: metadata updated
+[2026-09-30 23:17:30.698] [info]: Плоть [FSFSE0000]: metadata updated
+[2026-09-30 23:17:30.711] [info]: Всё исправить [SRTYY0000]: metadata updated
+[2026-09-30 23:17:30.716] [info]: Выпускной вечер на Миссиссиппи [FPNIM0000]: metadata updated
+[2026-09-30 23:17:30.717] [info]: Далтон Смит vs Матье Жермен [FDSMG0000]: metadata updated
+[2026-09-30 23:17:30.723] [info]: Пациенты [STRTM0000]: metadata updated
+[2026-09-30 23:17:30.738] [info]: Большая маленькая ложь [SBLIL0000]: metadata updated
+[2026-09-30 23:17:30.744] [info]: Я – Хит Леджер [FIAHL0000]: metadata updated
+[2026-09-30 23:17:30.747] [info]: Джек Булл [FTJAB0000]: metadata updated
+[2026-09-30 23:17:30.754] [info]: Патерно [FPTRN0000]: metadata updated
+[2026-09-30 23:17:30.769] [info]: Дети шоу-бизнеса [FSHKI0000]: metadata updated
+[2026-09-30 23:17:30.773] [info]: Элвин и бурундуки [FAACA0000]: metadata updated
+[2026-09-30 23:17:30.775] [info]: Однажды в апреле [FSOIA0000]: metadata updated
+[2026-09-30 23:17:30.779] [info]: По вертикали [FWCGR0000]: metadata updated
+[2026-09-30 23:17:30.787] [info]: Я – Пол Уокер [FIAPW0000]: metadata updated
+[2026-09-30 23:17:30.792] [info]: Границы дозволенного [FTBLB0000]: metadata updated
+[2026-09-30 23:17:30.794] [info]: Между Богом и Элвисом [FGOIT0000]: metadata updated
+[2026-09-30 23:17:30.805] [info]: Слёзы провинции Сычуань [FCUDT0000]: metadata updated
+[2026-09-30 23:17:30.806] [info]: Сорвиголова [FDAED0000]: metadata updated
+[2026-09-30 23:17:30.806] [info]: Секрет [FAGGY0000]: metadata updated
+[2026-09-30 23:17:30.823] [info]: Я – Джо Фрейзер [FIAJF0000]: metadata updated
+[2026-09-30 23:17:30.824] [info]: Роскошные проблемы [FPPLR0000]: metadata updated
+[2026-09-30 23:17:30.826] [info]: Декстер® [SDEXT0000]: metadata updated
+[2026-09-30 23:17:30.829] [info]: Моя соседка – призрак [FGHBI0000]: metadata updated
+[2026-09-30 23:17:30.831] [info]: Форсайты [SFOYT0000]: metadata updated
+[2026-09-30 23:17:30.842] [info]: Райан Гарсия vs Эммануэль Таго [FRGET0000]: metadata updated
+[2026-09-30 23:17:30.846] [info]: Темные ветра [SDWRR0000]: metadata updated
+[2026-09-30 23:17:30.857] [info]: Like.Share.Follow. [FLSFO0000]: metadata updated
+[2026-09-30 23:17:30.865] [info]: Роковая черта [SFCSC0000]: metadata updated
+[2026-09-30 23:17:30.867] [info]: Тусовщик Кунмин [SYBKG0000]: metadata updated
+[2026-09-30 23:17:30.877] [info]: Чернобыль [SCHER0000]: metadata updated
+[2026-09-30 23:17:30.878] [info]: Душегубы [SDYUY0000]: metadata updated
+[2026-09-30 23:17:30.882] [info]: Кеничи Огава vs Джо Кордина [FKOJC0000]: metadata updated
+[2026-09-30 23:17:30.885] [info]: Киноклуб [SFCBI0000]: metadata updated
+[2026-09-30 23:17:30.889] [info]: Кредо убийцы [FACCS0000]: metadata updated
+[2026-09-30 23:17:30.891] [info]: Брэдли Голдсмит vs Амир Абубакер [FBGAA0000]: metadata updated
+[2026-09-30 23:17:30.891] [info]: Конор Бенн vs Крис ван Херден [FCBCV0000]: metadata updated
+[2026-09-30 23:17:30.893] [info]: Правдивое кино [FCIVE0000]: metadata updated
+[2026-09-30 23:17:30.903] [info]: Убийство в маленьком городке [SMSTL0000]: metadata updated
+[2026-09-30 23:17:30.912] [info]: Тёмный демон [STANG0000]: metadata updated
+[2026-09-30 23:17:30.915] [info]: Сцены из супружеской жизни [SSFMS0000]: metadata updated
+[2026-09-30 23:17:30.919] [info]: Джордж Лиддард vs Деррик Осазе [FGLDO0000]: metadata updated
+[2026-09-30 23:17:30.923] [info]: Джон Рамирес vs Луис Падилья [FJRLP0000]: metadata updated
+[2026-09-30 23:17:30.926] [info]: Силиконовая долина [SSIVO0000]: metadata updated
+[2026-09-30 23:17:30.928] [info]: Хокинг: вы меня слышите? [FHCYH0000]: metadata updated
+[2026-09-30 23:17:30.939] [info]: Уильям Сепеда vs Тевин Фармер II [FWZTF0000]: metadata updated
+[2026-09-30 23:17:30.940] [info]: Последний автомобиль. Закрытие завода Дженерал Моторс [FLATR0000]: metadata updated
+[2026-09-30 23:17:30.943] [info]: На путь истинный [FFAGR0000]: metadata updated
+[2026-09-30 23:17:30.946] [info]: Льюис Крокер vs Пэдди Донован [FLCPD0000]: metadata updated
+[2026-09-30 23:17:30.951] [info]: Леонард Коэн: Если будет на то твоя воля [FLCII0000]: metadata updated
+[2026-09-30 23:17:30.954] [info]: Джек Кэттеролл vs Арнольд Барбоза-мл. [FJCAB0000]: metadata updated
+[2026-09-30 23:17:30.959] [info]: Забор [FFECE0000]: metadata updated
+[2026-09-30 23:17:30.960] [info]: Диего Пачеко vs Стивен Нельсон [FDPSN0000]: metadata updated
+[2026-09-30 23:17:30.961] [info]: Хуан Франсиско Эстрада vs Арги Кортес [FJFEA0000]: metadata updated
+[2026-09-30 23:17:30.963] [info]: Озорная Такаги. Фильм [FTMTM0000]: metadata updated
+[2026-09-30 23:17:30.965] [info]: Джарон Эннис vs Эймантас Станионис [FJEES0000]: metadata updated
+[2026-09-30 23:17:30.971] [info]: Пит Холмс: Лица и звуки [FPEHO0000]: metadata updated
+[2026-09-30 23:17:30.979] [info]: Ночной администратор [SNMHA0000]: metadata updated
+[2026-09-30 23:17:30.992] [info]: Дом с прислугой [SSARE0000]: metadata updated
+[2026-09-30 23:17:30.994] [info]: Кико Мартинес vs Джош Уоррингтон II [FKMJW0000]: metadata updated
+[2026-09-30 23:17:31.003] [info]: Алисия Баумгарднер vs Кристина Линардату II [FABCL0000]: metadata updated
+[2026-09-30 23:17:31.004] [info]: Эрик Прист vs Тайлер Ховард [FEPTH0000]: metadata updated
+[2026-09-30 23:17:31.021] [info]: Опасность в моем сердце [SDIMH0000]: metadata updated
+[2026-09-30 23:17:31.033] [info]: Ведьмнадзор [SWWTT0000]: metadata updated
+[2026-09-30 23:17:31.041] [info]: Проверка на дороге [FTRSP0000]: metadata updated
+[2026-09-30 23:17:31.046] [info]: Ангелы в Америке [SANAM0000]: metadata updated
+[2026-09-30 23:17:31.050] [info]: Ричардсон Хитчинс vs Хосе Сепеда [FRHJZ0000]: metadata updated
+[2026-09-30 23:17:31.056] [info]: Элвин и бурундуки 3 [FAACC0000]: metadata updated
+[2026-09-30 23:17:31.057] [info]: Творение Господне [FSTLM0000]: metadata updated
+[2026-09-30 23:17:31.066] [info]: Школа медсестер [SNNRE0000]: metadata updated
+[2026-09-30 23:17:31.067] [info]: Шавкат Рахимов vs Джо Кордина [FSRJC0000]: metadata updated
+[2026-09-30 23:17:31.086] [info]: Обычные люди [FEDPP0000]: metadata updated
+[2026-09-30 23:17:31.087] [info]: Феррелл выходит на поле [FFTTF0000]: metadata updated
+[2026-09-30 23:17:31.091] [info]: Люк Маккормак vs Кэй Проспер [FLMCK0000]: metadata updated
+[2026-09-30 23:17:31.092] [info]: Норма Джин и Мэрилин [FNOMA0000]: metadata updated
+[2026-09-30 23:17:31.095] [info]: Энтони Джошуа vs Роберт Хелениус [FAJRH0000]: metadata updated
+[2026-09-30 23:17:31.103] [info]: Красавцы [SENTO0000]: metadata updated
+[2026-09-30 23:17:31.104] [info]: Твин Пикс [STWPE0000]: metadata updated
+[2026-09-30 23:17:31.114] [info]: Раненый олень [FWFAN0000]: metadata updated
+[2026-09-30 23:17:31.126] [info]: Конец медицины [FEMOF0000]: metadata updated
+[2026-09-30 23:17:31.132] [info]: Оскар Дуарте vs Мигель Мадуэно [FODMM0000]: metadata updated
+[2026-09-30 23:17:31.133] [info]: Жизнь с Линкольном [FLLIN0000]: metadata updated
+[2026-09-30 23:17:31.144] [info]: Грабь награбленное: Искупление [SLRII0000]: metadata updated
+[2026-09-30 23:17:31.147] [info]: Игра престолов [SGOFT0000]: metadata updated
+[2026-09-30 23:17:31.148] [info]: Даниэле Скардина vs Джованни Де Каролис [FDSGD0000]: metadata updated
+[2026-09-30 23:17:31.150] [info]: Призраки Абу-Грэйб [FABUG0000]: metadata updated
+[2026-09-30 23:17:31.151] [info]: Адский учитель Нубэ [SHTJS0000]: metadata updated
+[2026-09-30 23:17:31.152] [info]: Ли Вуд vs Джош Уоррингтон [FLWJW0000]: metadata updated
+[2026-09-30 23:17:31.153] [info]: Монтана Лав vs Стив Спарк [FMLSS0000]: metadata updated
+[2026-09-30 23:17:31.154] [info]: Искусство слепых фотографов [FDLAB0000]: metadata updated
+[2026-09-30 23:17:31.156] [info]: Воспоминания о художнике. Роберт Де Ниро-старший [FREDE0000]: metadata updated
+[2026-09-30 23:17:31.157] [info]: Цунами [STSUN0000]: metadata updated
+[2026-09-30 23:17:31.158] [info]: Мэнн против "Форда" [FMVFO0000]: metadata updated
+[2026-09-30 23:17:31.163] [info]: Номер на руке прадеда [FNGGA0000]: metadata updated
+[2026-09-30 23:17:31.167] [info]: Хайме Мунгия vs Джимми Келли [FJMJK0000]: metadata updated
+[2026-09-30 23:17:31.168] [info]: Охота на Усаму [FMANH0000]: metadata updated
+[2026-09-30 23:17:31.181] [info]: Джонни Фишер vs Дэйв Аллен II [FJFDA0000]: metadata updated
+[2026-09-30 23:17:31.190] [info]: Джеррод Кармайкл: Ротаниэль [FJCRJ0000]: metadata updated
+[2026-09-30 23:17:31.191] [info]: Клеватесс [SCTVE0000]: metadata updated
+[2026-09-30 23:17:31.196] [info]: Кто их пригласил? [FWITV0000]: metadata updated
+[2026-09-30 23:17:31.207] [info]: За гранью З/Л/А [FVHSB0000]: metadata updated
+[2026-09-30 23:17:31.223] [info]: Кадры [FINNR0000]: metadata updated
+[2026-09-30 23:17:31.225] [info]: Тиг Нотаро: Девушка, которую прервали [FTNBG0000]: metadata updated
+[2026-09-30 23:17:31.226] [info]: З/Л/О/99 [FVHSV0000]: metadata updated
+[2026-09-30 23:17:31.230] [info]: Рокки Эрнандес vs Рене Теллес Хирон [FRHRT0000]: metadata updated
+[2026-09-30 23:17:31.234] [info]: Лихорадка [FFEVE0000]: metadata updated
+[2026-09-30 23:17:31.250] [info]: Шантель Кэмерон vs Кэти Тейлор II [FCCKT0000]: metadata updated
+[2026-09-30 23:17:31.254] [info]: За демона извини [FSSOR0000]: metadata updated
+[2026-09-30 23:17:31.254] [info]: Проект «Альцгеймер»: Записи потерянной памяти [FALZH0000]: metadata updated
+[2026-09-30 23:17:31.260] [info]: Любовь сквозь стены [SWYOL0000]: metadata updated
+[2026-09-30 23:17:31.264] [info]: Керман Лехаррага vs Джей Джей Меткалф [FKLJJ0000]: metadata updated
+[2026-09-30 23:17:31.265] [info]: Джерри Вайнтрауб. Голливудская Легенда [FHISW0000]: metadata updated
+[2026-09-30 23:17:31.267] [info]: Эйфория [SEUPH0000]: metadata updated
+[2026-09-30 23:17:31.274] [info]: Ходячие мертвецы: Дэрил Диксон [STWDD0000]: metadata updated
+[2026-09-30 23:17:31.275] [info]: Крис Рок. Убейте вестника [FCRKM0000]: metadata updated
+[2026-09-30 23:17:31.279] [info]: Элвин и бурундуки: Грандиозное бурундуключение [FAACR0000]: metadata updated
+[2026-09-30 23:17:31.287] [info]: Axios: Все имеет значение [SAXIO0000]: metadata updated
+[2026-09-30 23:17:31.288] [info]: Призраки [SGTST0000]: metadata updated
+[2026-09-30 23:17:31.296] [info]: Все, что нужно знать о путешествиях во времени [FFAQT0000]: metadata updated
+[2026-09-30 23:17:31.297] [info]: Одербрух [SBBNB0000]: metadata updated
+[2026-09-30 23:17:31.299] [info]: Титосэ в бутылке Рамунэ [SCIRB0000]: metadata updated
+[2026-09-30 23:17:31.304] [info]: Собачий год [FADOY0000]: metadata updated
+[2026-09-30 23:17:31.305] [info]: Энергетическая революция сегодня [FHCER0000]: metadata updated
+[2026-09-30 23:17:31.305] [info]: Разговор о Сьюзен Зонтаг [FREGA0000]: metadata updated
+[2026-09-30 23:17:31.308] [info]: Настоящий детектив [STRDE0000]: metadata updated
+[2026-09-30 23:17:31.311] [info]: Панчо Вилья [FANDS0000]: metadata updated
+[2026-09-30 23:17:31.311] [info]: updated: C:\Users\pemaltynov\.cache\lazyam\project_data.json from //192.168.31.4/buffer/IN/@AMEDIA_IN/metadata.json
+[2026-09-30 23:17:31.556] [info]: new task added: Clevatess_213_PRT260930160000
+[2026-09-30 23:17:31.582] [info]: key SER_09202_18: found in global data
+[2026-09-30 23:17:33.393] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Klevatess_s02e13_PRT260930160000_0.4.4.sh
+[2026-10-01 10:58:16.189] [info]: update started: C:\Users\pemaltynov\.cache\lazyam\project_data.json
+[2026-10-01 10:58:17.551] [info]: Тёмный демон [STANG0000]: metadata updated
+[2026-10-01 10:58:17.634] [info]: updated: C:\Users\pemaltynov\.cache\lazyam\project_data.json from //192.168.31.4/buffer/IN/@AMEDIA_IN/metadata.json
+[2026-10-02 19:45:06.237] [warning]: failed to check lock: %!v(MISSING)
+[2026-10-03 07:49:59.079] [warning]: failed to check lock: %!v(MISSING)
+[2026-10-03 10:41:29.347] [warning]: failed to check lock: %!v(MISSING)
+[2026-10-03 15:18:15.264] [info]: update started: C:\Users\pemaltynov\.cache\lazyam\project_data.json
+[2026-10-03 15:18:16.258] [info]: Убить Джеки [SKJCL0000]: metadata updated
+[2026-10-03 15:18:16.685] [info]: updated: C:\Users\pemaltynov\.cache\lazyam\project_data.json from //192.168.31.4/buffer/IN/@AMEDIA_IN/metadata.json
+[2026-10-03 15:18:16.932] [info]: new task added: TOUGEN_ANKI_201
+[2026-10-03 15:18:16.991] [warning]: key Temnyy_demon_02_sezon_01_seriya_63361: not found in global data
+[2026-10-03 15:18:38.792] [warning]: key Temnyy_demon_02_sezon_01_seriya_63361: search failed: no local metadata provided
+[2026-10-03 15:18:38.793] [warning]: fallback no metadata to //192.168.31.4/buffer/IN/@AMEDIA_IN/TOUGEN_ANKI_201 transcoding method
+[2026-10-03 15:19:03.018] [info]: transcoding script generated: //192.168.31.4/buffer/IN/TOUGEN_ANKI_201.sh
+[2026-10-04 17:10:53.323] [info]: new task added: BEN_WHITTAKER_VS_CONOR_WALLACE_PRT261003000000
+[2026-10-04 17:10:53.344] [warning]: key SPO_63568: not found in global data
+[2026-10-04 17:11:15.156] [warning]: key SPO_63568: search failed: no local metadata provided
+[2026-10-04 17:11:15.156] [warning]: fallback no metadata to //192.168.31.4/buffer/IN/@AMEDIA_IN/BEN_WHITTAKER_VS_CONOR_WALLACE_PRT261003000000 transcoding method
+[2026-10-04 17:11:39.731] [info]: transcoding script generated: //192.168.31.4/buffer/IN/BEN_WHITTAKER_VS_CONOR_WALLACE_PRT261003000000.sh
+[2026-10-04 17:14:40.156] [info]: new task added: BILAL_FAWAZ_VS_EITHAN_JAMES_PRT261003000000
+[2026-10-04 17:14:40.157] [info]: new task added: IBRAHEEM_SULAIMAAN_VS_SONNY_HARDY_PRT261003000000
+[2026-10-04 17:14:40.157] [info]: new task added: ODEL_KAMARA_VS_THODORIS_RITZAKIS_PRT261003000000
+[2026-10-04 17:14:40.158] [info]: new task added: SEAN_BRUCE_VS_HAMZA_UDDIN_PRT261003000000
+[2026-10-04 17:14:40.169] [warning]: key SPO_63570: not found in global data
+[2026-10-04 17:15:01.248] [warning]: key SPO_63570: search failed: no local metadata provided
+[2026-10-04 17:15:01.249] [warning]: fallback no metadata to //192.168.31.4/buffer/IN/@AMEDIA_IN/BILAL_FAWAZ_VS_EITHAN_JAMES_PRT261003000000 transcoding method
+[2026-10-04 17:15:22.602] [info]: transcoding script generated: //192.168.31.4/buffer/IN/BILAL_FAWAZ_VS_EITHAN_JAMES_PRT261003000000.sh
+[2026-10-04 17:15:22.686] [warning]: key SPO_63573: not found in global data
+[2026-10-04 17:15:43.732] [warning]: key SPO_63573: search failed: no local metadata provided
+[2026-10-04 17:15:43.733] [warning]: fallback no metadata to //192.168.31.4/buffer/IN/@AMEDIA_IN/IBRAHEEM_SULAIMAAN_VS_SONNY_HARDY_PRT261003000000 transcoding method
+[2026-10-04 17:16:05.084] [info]: transcoding script generated: //192.168.31.4/buffer/IN/IBRAHEEM_SULAIMAAN_VS_SONNY_HARDY_PRT261003000000.sh
+[2026-10-04 17:16:05.091] [warning]: key SPO_63572: not found in global data
+[2026-10-04 17:16:26.155] [warning]: key SPO_63572: search failed: no local metadata provided
+[2026-10-04 17:16:26.156] [warning]: fallback no metadata to //192.168.31.4/buffer/IN/@AMEDIA_IN/ODEL_KAMARA_VS_THODORIS_RITZAKIS_PRT261003000000 transcoding method
+[2026-10-04 17:16:47.367] [info]: transcoding script generated: //192.168.31.4/buffer/IN/ODEL_KAMARA_VS_THODORIS_RITZAKIS_PRT261003000000.sh
+[2026-10-04 17:16:47.382] [warning]: key SPO_63571: not found in global data
+[2026-10-04 17:17:08.439] [warning]: key SPO_63571: search failed: no local metadata provided
+[2026-10-04 17:17:08.439] [warning]: fallback no metadata to //192.168.31.4/buffer/IN/@AMEDIA_IN/SEAN_BRUCE_VS_HAMZA_UDDIN_PRT261003000000 transcoding method
+[2026-10-04 17:17:29.794] [info]: transcoding script generated: //192.168.31.4/buffer/IN/SEAN_BRUCE_VS_HAMZA_UDDIN_PRT261003000000.sh
+[2026-10-05 10:53:32.296] [info]: update started: C:\Users\pemaltynov\.cache\lazyam\project_data.json
+[2026-10-05 10:53:33.749] [info]: updated: C:\Users\pemaltynov\.cache\lazyam\project_data.json from //192.168.31.4/buffer/IN/@AMEDIA_IN/metadata.json
+[2026-10-05 10:53:33.993] [info]: new task added: As_a_Reincarnated_Aristocrat_’ll_Use_My_Appraisal_Skill_to_Rise_in_the_World_301
+[2026-10-05 10:53:34.130] [warning]: key EPS_XX_0000017: not found in global data
+[2026-10-05 10:53:56.252] [info]: key EPS_XX_0000017: found in local data
+[2026-10-05 10:53:59.420] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Pererozhdenie_v_aristokrata_so_sposobnostyu_analiza_s03e01_PRT261005000000_0.4.4.sh
+[2026-10-05 11:00:00.344] [info]: new task added: As_a_Reincarnated_Aristocrat_’ll_Use_My_Appraisal_Skill_to_Rise_in_the_World_302
+[2026-10-05 11:00:00.393] [warning]: key EPS_XX_0000018: not found in global data
+[2026-10-05 11:00:21.485] [info]: key EPS_XX_0000018: found in local data
+[2026-10-05 11:00:21.650] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Pererozhdenie_v_aristokrata_so_sposobnostyu_analiza_s03e02_PRT261005000000_0.4.4.sh
+[2026-10-05 11:36:28.234] [info]: trailer script for pererozhdenie_v_aristokrata_so_sposobnostyu_analiza_a_teka.mp4 complete
+[2026-10-05 11:39:09.489] [notice]: session started
+[2026-10-05 11:39:09.490] [notice]: analitycs disabled
+[2026-10-05 11:39:09.515] [info]: update started: C:\Users\pemaltynov\.cache\lazyam\project_data.json
+[2026-10-05 11:39:10.899] [info]: updated: C:\Users\pemaltynov\.cache\lazyam\project_data.json from //192.168.31.4/buffer/IN/@AMEDIA_IN/metadata.json
+[2026-10-05 11:39:11.135] [info]: new task added: As_a_Reincarnated_Aristocrat_’ll_Use_My_Appraisal_Skill_to_Rise_in_the_World_301
+[2026-10-05 11:39:11.136] [info]: new task added: As_a_Reincarnated_Aristocrat_’ll_Use_My_Appraisal_Skill_to_Rise_in_the_World_302
+[2026-10-05 11:39:11.153] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/As_a_Reincarnated_Aristocrat_’ll_Use_My_Appraisal_Skill_to_Rise_in_the_World_301
+[2026-10-05 11:39:11.161] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/As_a_Reincarnated_Aristocrat_’ll_Use_My_Appraisal_Skill_to_Rise_in_the_World_302
+[2026-10-05 15:36:42.426] [warning]: failed to check lock: %!v(MISSING)
+[2026-10-05 16:06:51.883] [warning]: failed to check lock: %!v(MISSING)
+[2026-10-05 16:15:58.092] [warning]: failed to check lock: %!v(MISSING)
+[2026-10-05 16:16:03.096] [warning]: failed to check lock: %!v(MISSING)
+[2026-10-05 16:22:08.781] [warning]: failed to check lock: %!v(MISSING)
+[2026-10-05 16:28:14.679] [error]: failed to list active tasks: failed to read input directory: open //192.168.31.4/buffer/IN/@AMEDIA_IN/: Access is denied.
+[2026-10-05 18:19:36.592] [notice]: session started
+[2026-10-05 18:19:36.592] [notice]: analitycs disabled
+[2026-10-05 18:19:36.618] [info]: update started: C:\Users\pemaltynov\.cache\lazyam\project_data.json
+[2026-10-05 18:19:38.039] [info]: updated: C:\Users\pemaltynov\.cache\lazyam\project_data.json from //192.168.31.4/buffer/IN/@AMEDIA_IN/metadata.json
+[2026-10-05 23:26:16.835] [info]: new task added: TOUGEN_ANKI_Special_Recap_Nerima
+[2026-10-05 23:26:16.843] [warning]: key 63599-rus_Russkii: not found in global data
+[2026-10-05 23:26:38.791] [warning]: key 63599-rus_Russkii: search failed: no local metadata provided
+[2026-10-05 23:26:38.791] [warning]: key 63599: not found in global data
+[2026-10-05 23:26:59.859] [warning]: key 63599: search failed: no local metadata provided
+[2026-10-05 23:26:59.860] [warning]: fallback no metadata to //192.168.31.4/buffer/IN/@AMEDIA_IN/TOUGEN_ANKI_Special_Recap_Nerima transcoding method
+[2026-10-05 23:27:21.217] [info]: transcoding script generated: //192.168.31.4/buffer/IN/TOUGEN_ANKI_Special_Recap_Nerima.sh
+[2026-10-06 21:36:06.420] [info]: new task added: Tougen_Anki_201_PRT261006123615
+[2026-10-06 21:36:06.428] [warning]: key EPS_XX_0000016-rus_Russkii: not found in global data
+[2026-10-06 21:36:28.196] [info]: key EPS_XX_0000016-rus_Russkii: found in local data
+[2026-10-06 21:36:28.468] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Temnyy_demon_s02e01_PRT261006123615_0.4.4.sh
+[2026-10-06 21:39:28.830] [info]: new task added: Ben_Whittaker_vs_Conor_Wallace_Ben_Uittaker_vs_Konor_Uolles_D_PRT261006124138
+[2026-10-06 21:39:28.830] [info]: new task added: Ibraheem_Sulaimaan_vs_Sonny_Hardy_Ibragim_Suleiman_vs_Sonni_Khardi_D_PRT261006125202
+[2026-10-06 21:39:28.839] [warning]: key MOV_SPO_18_0000001: not found in global data
+[2026-10-06 21:39:49.936] [info]: key MOV_SPO_18_0000001: found in local data
+[2026-10-06 21:39:50.270] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Ben_uittaker_vs_konor_uolles_PRT261006124138_0.4.4.sh
+[2026-10-06 21:39:50.277] [warning]: key MOV_SPO_18_0000003: not found in global data
+[2026-10-06 21:40:11.353] [info]: key MOV_SPO_18_0000003: found in local data
+[2026-10-06 21:40:11.606] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Ibragim_suleyman_vs_sonni_hardi_PRT261006125202_0.4.4.sh
+[2026-10-06 23:37:26.409] [info]: new task added: Odel_Kamara_vs_Thodoris_Ritzakis_Odel_Kamara_vs_Todoris_Ritsakis_D_PRT261006124928
+[2026-10-06 23:37:26.418] [warning]: key MOV_SPO_18_0000002: not found in global data
+[2026-10-06 23:37:48.050] [info]: key MOV_SPO_18_0000002: found in local data
+[2026-10-06 23:37:49.972] [info]: transcoding script generated: //192.168.31.4/buffer/IN/Odel_kamara_vs_todoris_ricakis_PRT261006124928_0.4.4.sh
+[2026-10-06 23:58:52.713] [info]: new task added: Kill_Jackie_101_PRT261006133049
+[2026-10-06 23:58:52.714] [info]: new task added: Kill_Jackie_102_PRT261006132326
+[2026-10-06 23:58:52.733] [warning]: key EPS_18_0000008-rus_Russkii: not found in global data
+[2026-10-06 23:59:13.828] [info]: key EPS_18_0000008-rus_Russkii: found in local data
+[2026-10-07 10:54:58.216] [notice]: session started
+[2026-10-07 10:54:58.217] [notice]: analitycs disabled
+[2026-10-07 10:54:58.296] [info]: update started: C:\Users\pemaltynov\.cache\lazyam\project_data.json
+[2026-10-07 10:54:59.704] [info]: updated: C:\Users\pemaltynov\.cache\lazyam\project_data.json from //192.168.31.4/buffer/IN/@AMEDIA_IN/metadata.json
+[2026-10-07 10:54:59.936] [info]: new task added: Ben_Whittaker_vs_Conor_Wallace_Ben_Uittaker_vs_Konor_Uolles_D_PRT261006124138
+[2026-10-07 10:54:59.936] [info]: new task added: Ibraheem_Sulaimaan_vs_Sonny_Hardy_Ibragim_Suleiman_vs_Sonni_Khardi_D_PRT261006125202
+[2026-10-07 10:54:59.936] [info]: new task added: Kill_Jackie_101_PRT261006133049
+[2026-10-07 10:54:59.937] [info]: new task added: Kill_Jackie_102_PRT261006132326
+[2026-10-07 10:54:59.937] [info]: new task added: Odel_Kamara_vs_Thodoris_Ritzakis_Odel_Kamara_vs_Todoris_Ritsakis_D_PRT261006124928
+[2026-10-07 10:54:59.938] [info]: new task added: TOUGEN_ANKI_Special_Recap_Nerima
+[2026-10-07 10:54:59.938] [info]: new task added: Tougen_Anki_201_PRT261006123615
+[2026-10-07 10:54:59.964] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Odel_Kamara_vs_Thodoris_Ritzakis_Odel_Kamara_vs_Todoris_Ritsakis_D_PRT261006124928
+[2026-10-07 10:54:59.980] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/TOUGEN_ANKI_Special_Recap_Nerima
+[2026-10-07 10:54:59.991] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Tougen_Anki_201_PRT261006123615
+[2026-10-07 10:55:00.000] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Ben_Whittaker_vs_Conor_Wallace_Ben_Uittaker_vs_Konor_Uolles_D_PRT261006124138
+[2026-10-07 10:55:00.009] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Ibraheem_Sulaimaan_vs_Sonny_Hardy_Ibragim_Suleiman_vs_Sonni_Khardi_D_PRT261006125202
+[2026-10-07 10:55:00.019] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Kill_Jackie_101_PRT261006133049
+[2026-10-07 10:55:00.029] [warning]: key EPS_18_0000009-rus_Russkii: not found in global data
+[2026-10-07 10:55:21.144] [info]: key EPS_18_0000009-rus_Russkii: found in local data
+[2026-10-07 10:55:46.469] [notice]: session started
+[2026-10-07 10:55:46.469] [notice]: analitycs disabled
+[2026-10-07 10:55:46.481] [info]: update started: C:\Users\pemaltynov\.cache\lazyam\project_data.json
+[2026-10-07 10:55:47.801] [info]: updated: C:\Users\pemaltynov\.cache\lazyam\project_data.json from //192.168.31.4/buffer/IN/@AMEDIA_IN/metadata.json
+[2026-10-07 10:55:48.033] [info]: new task added: Ben_Whittaker_vs_Conor_Wallace_Ben_Uittaker_vs_Konor_Uolles_D_PRT261006124138
+[2026-10-07 10:55:48.033] [info]: new task added: Ibraheem_Sulaimaan_vs_Sonny_Hardy_Ibragim_Suleiman_vs_Sonni_Khardi_D_PRT261006125202
+[2026-10-07 10:55:48.033] [info]: new task added: Kill_Jackie_101_PRT261006133049
+[2026-10-07 10:55:48.034] [info]: new task added: Kill_Jackie_102_PRT261006132326
+[2026-10-07 10:55:48.034] [info]: new task added: Odel_Kamara_vs_Thodoris_Ritzakis_Odel_Kamara_vs_Todoris_Ritsakis_D_PRT261006124928
+[2026-10-07 10:55:48.034] [info]: new task added: TOUGEN_ANKI_Special_Recap_Nerima
+[2026-10-07 10:55:48.034] [info]: new task added: Tougen_Anki_201_PRT261006123615
+[2026-10-07 10:55:48.042] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Ibraheem_Sulaimaan_vs_Sonny_Hardy_Ibragim_Suleiman_vs_Sonni_Khardi_D_PRT261006125202
+[2026-10-07 10:55:48.051] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Kill_Jackie_101_PRT261006133049
+[2026-10-07 10:55:48.060] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Kill_Jackie_102_PRT261006132326
+[2026-10-07 10:55:48.069] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Odel_Kamara_vs_Thodoris_Ritzakis_Odel_Kamara_vs_Todoris_Ritsakis_D_PRT261006124928
+[2026-10-07 10:55:48.077] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/TOUGEN_ANKI_Special_Recap_Nerima
+[2026-10-07 10:55:48.085] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Tougen_Anki_201_PRT261006123615
+[2026-10-07 10:55:48.094] [warning]: no keys found: //192.168.31.4/buffer/IN/@AMEDIA_IN/Ben_Whittaker_vs_Conor_Wallace_Ben_Uittaker_vs_Konor_Uolles_D_PRT261006124138

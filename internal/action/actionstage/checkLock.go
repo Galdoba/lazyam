@@ -8,6 +8,7 @@ import (
 
 	"github.com/Galdoba/appcontext/logmanager"
 	"github.com/Galdoba/lazyam/internal/appmodule/config"
+	"github.com/Galdoba/lazyam/internal/appmodule/version"
 )
 
 func CheckLock(cfg *config.Config, log *logmanager.Logger) error {
@@ -24,6 +25,7 @@ mainLoop:
 			continue
 		}
 		for _, f := range fi {
+			lockType := version.Version()
 			if f.Name() == "lock" {
 				switch lockDetected {
 				case false:
@@ -44,6 +46,7 @@ mainLoop:
 					fmt.Printf("force unlock in %v                               \r", timer(lockAutoremove-since))
 					continue mainLoop
 				}
+				lockType += "valid"
 			}
 		}
 		return nil

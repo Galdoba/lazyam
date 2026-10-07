@@ -1,0 +1,235 @@
+{
+  "properties": {
+    "movies": {
+      "elements": {
+        "properties": {
+          "actors": {
+            "nullable": true,
+            "type": "string"
+          },
+          "age_restriction": {
+            "nullable": true,
+            "type": "string"
+          },
+          "cms_id": {
+            "nullable": true,
+            "type": "uint16"
+          },
+          "country": {
+            "nullable": true,
+            "type": "string"
+          },
+          "directors": {
+            "nullable": true,
+            "type": "string"
+          },
+          "end_date": {
+            "nullable": true
+          },
+          "file": {
+            "properties": {
+              "duration": {
+                "nullable": true,
+                "type": "float64"
+              },
+              "serid": {
+                "nullable": true,
+                "type": "string"
+              }
+            }
+          },
+          "genre": {
+            "nullable": true,
+            "type": "string"
+          },
+          "guid": {
+            "type": "string"
+          },
+          "imdb_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "kinopoisk_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "original_title": {
+            "type": "string"
+          },
+          "quote": {
+            "nullable": true,
+            "type": "string"
+          },
+          "quote_author": {
+            "nullable": true,
+            "type": "string"
+          },
+          "rus_description": {
+            "type": "string"
+          },
+          "rus_title": {
+            "nullable": true,
+            "type": "string"
+          },
+          "start_date": {
+            "type": "timestamp"
+          },
+          "year": {
+            "type": "uint16"
+          }
+        }
+      }
+    },
+    "series": {
+      "elements": {
+        "properties": {
+          "age_restriction": {
+            "nullable": true,
+            "type": "string"
+          },
+          "cms_id": {
+            "nullable": true,
+            "type": "uint16"
+          },
+          "country": {
+            "nullable": true,
+            "type": "string"
+          },
+          "end_date": {
+            "nullable": true,
+            "type": "timestamp"
+          },
+          "genre": {
+            "nullable": true,
+            "type": "string"
+          },
+          "guid": {
+            "type": "string"
+          },
+          "imdb_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "kinopoisk_id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "original_broadcaster": {
+            "nullable": true,
+            "type": "string"
+          },
+          "original_title": {
+            "type": "string"
+          },
+          "quote": {
+            "nullable": true,
+            "type": "string"
+          },
+          "quote_author": {
+            "nullable": true,
+            "type": "string"
+          },
+          "rus_description": {
+            "type": "string"
+          },
+          "rus_title": {
+            "type": "string"
+          },
+          "seasons": {
+            "elements": {
+              "properties": {
+                "actors": {
+                  "nullable": true,
+                  "type": "string"
+                },
+                "cms_id": {
+                  "nullable": true,
+                  "type": "uint16"
+                },
+                "directors": {
+                  "nullable": true,
+                  "type": "string"
+                },
+                "end_date": {
+                  "nullable": true
+                },
+                "episodes": {
+                  "elements": {
+                    "properties": {
+                      "cms_id": {
+                        "nullable": true,
+                        "type": "uint16"
+                      },
+                      "end_date": {
+                        "nullable": true
+                      },
+                      "episode_synopsis": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "file": {
+                        "properties": {
+                          "duration": {
+                            "nullable": true,
+                            "type": "float64"
+                          },
+                          "serid": {
+                            "nullable": true,
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "guid": {
+                        "type": "string"
+                      },
+                      "order_number": {
+                        "type": "uint8"
+                      },
+                      "original_episode_name": {
+                        "type": "string"
+                      },
+                      "rus_episode_name": {
+                        "type": "string"
+                      },
+                      "start_date": {
+                        "type": "timestamp"
+                      },
+                      "year": {
+                        "nullable": true,
+                        "type": "uint16"
+                      }
+                    }
+                  }
+                },
+                "guid": {
+                  "type": "string"
+                },
+                "order_number": {
+                  "type": "uint8"
+                },
+                "orig_name": {
+                  "type": "string"
+                },
+                "rus_name": {
+                  "type": "string"
+                },
+                "season_description": {
+                  "nullable": true,
+                  "type": "string"
+                },
+                "start_date": {
+                  "type": "timestamp"
+                },
+                "years": {}
+              }
+            }
+          },
+          "start_date": {
+            "type": "timestamp"
+          },
+          "years": {}
+        }
+      }
+    }
+  }
+}
