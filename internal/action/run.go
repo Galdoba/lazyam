@@ -253,36 +253,18 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 							}
 							source = activeTask.INBASE + "_" + source
 							srt = activeTask.INBASE + "_" + srt
-							template, audioSuffixes := selectTemplate(activeTask)
-							transcodingProcess := &scriptkit.Script{}
-							scriptPath := filepath.ToSlash(filepath.Join(cfg.Declarations.OutputDirectory, fmt.Sprintf("%v.sh", activeTask.INBASE)))
 
-							args := []scriptkit.ScriptArgument{}
-							args = append(args, scriptkit.ScriptArg("source", source))
-							args = append(args, scriptkit.ScriptArg("base_with_season", activeTask.TranslitedBaseSeason()))
-							args = append(args, scriptkit.ScriptArg("outbase", activeTask.OUTBASE))
-							yadif := scriptkit.ScriptArg("yadif", "")
-							if activeTask.InterlaceDetected {
-								yadif = scriptkit.ScriptArg("yadif", "yadif,")
-							}
-							args = append(args, yadif)
-							args = append(args, scriptkit.ScriptArg("suffix_1", audioSuffixes[0]))
-
-							switch template {
-							case scriptkit.Amedia1:
-							case scriptkit.Amedia2:
-								args = append(args, scriptkit.ScriptArg("suffix_2", audioSuffixes[1]))
-							case scriptkit.Amedia2S:
-								args = append(args, scriptkit.ScriptArg("srt", srt))
-								args = append(args, scriptkit.ScriptArg("suffix_2", audioSuffixes[1]))
-							}
-							transcodingProcess = scriptkit.New(scriptPath, scriptkit.WithTemplate(template), scriptkit.WithArgs(args...))
-
-							if err := transcodingProcess.CreateScriptFile(); err != nil {
-								log.Errorf("failed to start interlace check: %v", err.Error())
+							script, err := BuildScriptArgs(cfg, activeTask, source, srt)
+							if err != nil {
+								log.Errorf("failed to build transcoding script: %v", err.Error())
 								break
 							}
-							log.Infof("transcoding script generated: %v", transcodingProcess.Path())
+
+							if err := script.CreateScriptFile(); err != nil {
+								log.Errorf("failed to create transcoding script: %v", err.Error())
+								break
+							}
+							log.Infof("transcoding script generated: %v", script.Path())
 							activeTask.ProcessingStage = task.Phase_WaitTranceCodingResult
 							stageResult = 1
 						}
@@ -335,6 +317,69 @@ func toLinuxPath(path string) string {
 	return strings.ReplaceAll(path, "//192.168.31.4/buffer/IN", "/home/pemaltynov/IN")
 }
 
+// BuildScriptArgs assembles script arguments for the given task using dynamic audio support.
+// Returns a fully configured *scriptkit.Script ready for CreateScriptFile().
+func BuildScriptArgs(cfg *config.Config, t *task.Task, source, srt string) (*scriptkit.Script, error) {
+	// 1. Collect audio tracks from MediaFiles, applying sport filter
+	var audioTracks []scriptkit.AudioTrack
+	for _, mf := range t.MediaFiles {
+		if len(mf.Languages) == 0 {
+			continue // not an audio file
+		}
+		for i, lang := range mf.Languages {
+			// Sport filter: skip non-RUS if t.IsSport
+			if t.IsSport && !strings.Contains(lang, "RUS") {
+				continue
+			}
+			layout := ""
+			if i < len(mf.Layout) {
+				layout = mf.Layout[i]
+			}
+			if layout == "" {
+				continue
+			}
+			track := scriptkit.NewAudioTrack(lang, layout, len(audioTracks))
+			audioTracks = append(audioTracks, track)
+		}
+	}
+
+	// 3. Build audio section
+	audioFilter, audioOutputs := scriptkit.AudioScriptSection(audioTracks)
+
+	// 4. Build SRT sections
+	var srtMove, srtSection, srtCleanup string
+	if srt != "" {
+		srtMove = fmt.Sprintf(`mv "${BUFFER}/${SRT}" "${IN_PROGRESS}/${SRT}"\n`)
+		srtSection = fmt.Sprintf(`cp "${IN_PROGRESS}/${SRT}" "${TARGET_DIR}/${OUTBASE}.srt"\n`)
+		srtCleanup = fmt.Sprintf(`mv "${IN_PROGRESS}/${SRT}" "${DONE}/${SRT}"\n`)
+	}
+
+	// 5. Assemble arguments
+	yadif := ""
+	if t.InterlaceDetected {
+		yadif = "yadif,"
+	}
+
+	args := []scriptkit.ScriptArgument{
+		scriptkit.ScriptArg("source", source),
+		scriptkit.ScriptArg("base_with_season", t.TranslitedBaseSeason()),
+		scriptkit.ScriptArg("outbase", t.OUTBASE),
+		scriptkit.ScriptArg("yadif", yadif),
+		scriptkit.ScriptArg("audio_filter", audioFilter),
+		scriptkit.ScriptArg("audio_outputs", audioOutputs),
+		scriptkit.ScriptArg("srt_move", srtMove),
+		scriptkit.ScriptArg("srt_section", srtSection),
+		scriptkit.ScriptArg("srt_cleanup", srtCleanup),
+	}
+
+	// 6. Create script
+	scriptPath := filepath.ToSlash(filepath.Join(cfg.Declarations.OutputDirectory, fmt.Sprintf("%v.sh", t.INBASE)))
+	return scriptkit.New(scriptPath,
+		scriptkit.WithTemplate(scriptkit.AmediaGeneric),
+		scriptkit.WithArgs(args...),
+	), nil
+}
+
 func selectTemplate(t *task.Task) (string, []string) {
 	suffixes := t.Suffixes()
 	suffixes = excludeRepetitions(suffixes)
@@ -360,7 +405,7 @@ func selectTemplate(t *task.Task) (string, []string) {
 		}
 		return scriptkit.Amedia2, keep
 	}
-	return "", []string{}
+	return "", []string{"UNK"}
 
 }
 
