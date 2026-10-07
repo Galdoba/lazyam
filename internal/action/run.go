@@ -362,6 +362,7 @@ func BuildScriptArgs(cfg *config.Config, t *task.Task, source, srt string) (*scr
 
 	args := []scriptkit.ScriptArgument{
 		scriptkit.ScriptArg("source", source),
+		scriptkit.ScriptArg("srt", srt),
 		scriptkit.ScriptArg("base_with_season", t.TranslitedBaseSeason()),
 		scriptkit.ScriptArg("outbase", t.OUTBASE),
 		scriptkit.ScriptArg("yadif", yadif),

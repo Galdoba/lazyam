@@ -67,6 +67,7 @@ var AmediaGeneric = strings.Join([]string{
 	`#`,
 	`# Определение переменных`,
 	`SOURCE="|=source=|"`,
+	`SRT="|=srt=|"`,
 	`BASE_WITH_SEASON="|=base_with_season=|"`,
 	`OUTBASE="|=outbase=|"`,
 	`YADIF="|=yadif=|"`,
