@@ -252,7 +252,9 @@ func Process(actx *appmodule.AppContext) cli.ActionFunc {
 								break
 							}
 							source = activeTask.INBASE + "_" + source
-							srt = activeTask.INBASE + "_" + srt
+							if srt != "" {
+								srt = activeTask.INBASE + "_" + srt
+							}
 
 							script, err := BuildScriptArgs(cfg, activeTask, source, srt)
 							if err != nil {
@@ -349,9 +351,9 @@ func BuildScriptArgs(cfg *config.Config, t *task.Task, source, srt string) (*scr
 	// 4. Build SRT sections
 	var srtMove, srtSection, srtCleanup string
 	if srt != "" {
-		srtMove = fmt.Sprintf(`mv "${BUFFER}/${SRT}" "${IN_PROGRESS}/${SRT}"\n`)
-		srtSection = fmt.Sprintf(`cp "${IN_PROGRESS}/${SRT}" "${TARGET_DIR}/${OUTBASE}.srt"\n`)
-		srtCleanup = fmt.Sprintf(`mv "${IN_PROGRESS}/${SRT}" "${DONE}/${SRT}"\n`)
+		srtMove = fmt.Sprintf(`mv "${BUFFER}/${SRT}" "${IN_PROGRESS}/${SRT}"`)
+		srtSection = fmt.Sprintf(`cp "${IN_PROGRESS}/${SRT}" "${TARGET_DIR}/${OUTBASE}.srt"`)
+		srtCleanup = fmt.Sprintf(`mv "${IN_PROGRESS}/${SRT}" "${DONE}/${SRT}"`)
 	}
 
 	// 5. Assemble arguments
